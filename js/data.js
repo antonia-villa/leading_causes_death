@@ -1,10 +1,15 @@
 // DATA SOURCE: https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013
 
-// Retrieve Raw Data
+// Data Sets
 var rawData = [];
-var stateDate = [];
+var stateData = [];
 var yearData = [];
 var causeData = [];
+
+// Unique Values
+var years = [];
+var causes = [];
+var states = [];
 
 // Get Raw Data 
 function retrieveRawData() {
@@ -15,6 +20,7 @@ function retrieveRawData() {
   
       for(var i=0; i< data.length; i++){
         var dataItem = data[i];
+
         var updatedItem = {
           'year': Number(dataItem[8]), 
           'category': dataItem[9],
@@ -23,20 +29,25 @@ function retrieveRawData() {
           'total': Number(dataItem[12])
         };
 
+        if(updatedItem.state != 'United States'){
         rawData.push(updatedItem);
+      }
      };
-     console.log('state data:', getStateData(rawData));
-     console.log('year data:', getYearData(rawData));
-     console.log('cause data:', getCauseData(rawData));
-  });
+     stateData = getStateData(rawData);
+     yearData = getYearData(rawData);
+     causeData = getCauseData(rawData);
+
+    visualtest();
     return rawData;
+  });
 }
 
+// Create data sets
 retrieveRawData();
 
+// Create Year Data Set
 function getYearData(rawData){
-  var distinctYears = {};
-  var years = [];
+  var distinctYears = [];
 
   for(var i = 0; i < rawData.length; i++){
     if(!distinctYears[rawData[i].year]){
@@ -50,9 +61,9 @@ function getYearData(rawData){
   return distinctYears;
 }
 
+// Create Year Cause Data Set
 function getCauseData(rawData){
-  var distinctCauses = {};
-  var causes = [];
+  var distinctCauses = [];
 
   for(var i = 0; i < rawData.length; i++){
     if(!distinctCauses[rawData[i].cause]){
@@ -66,9 +77,9 @@ function getCauseData(rawData){
   return distinctCauses;
 }
 
+// Create State Cause Data Set
 function getStateData(rawData){
-  var distinctStates = {};
-  var states = [];
+  var distinctStates = [];
 
   for(var i = 0; i < rawData.length; i++){
     if(!distinctStates[rawData[i].state]){
@@ -81,9 +92,6 @@ function getStateData(rawData){
   }
   return distinctStates;
 }
-
-//console.log(distinctStates);
-
 
 
 

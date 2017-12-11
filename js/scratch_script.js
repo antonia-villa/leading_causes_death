@@ -19,7 +19,7 @@ var states = [];
 // Get Raw Data 
 function retrieveRawData() {
 
-  
+
   $.get('https://data.cdc.gov/api/views/bi63-dtpu/rows.json?accessType=DOWNLOAD', {
     }).done(function(response) {
      var data = response.data;
@@ -58,24 +58,24 @@ function retrieveYears(item,index) {
 
 
       // Retrieve unique years
-      // if(!distinctYears[rawData.year]){
-      //   years.push(Number(rawData.year));
-      //   distinctYears[rawData[i].year] = true;
-      // }
+      if(!distinctYears[rawData.year]){
+        years.push(Number(rawData.year));
+        distinctYears[rawData[i].year] = true;
+      }
 
-      // // Retrieve unique Causes
-      // if(!distinctCauses[rawData[i].cause]){
-      //     causes.push(rawData[i].cause);
-      //     distinctCauses[rawData[i].cause] = true;
-      // }
+      // Retrieve unique Causes
+      if(!distinctCauses[rawData[i].cause]){
+          causes.push(rawData[i].cause);
+          distinctCauses[rawData[i].cause] = true;
+      }
 
-      // // Retrieve unique states
-      // if(!distinctStates[rawData[i].state]){
-      //     states.push(rawData[i].state);
-      //     distinctStates[rawData[i].state] = true;
-      // }
+      // Retrieve unique states
+      if(!distinctStates[rawData[i].state]){
+          states.push(rawData[i].state);
+          distinctStates[rawData[i].state] = true;
+      }
 
-    // };
+    };
 
 
 
@@ -89,27 +89,27 @@ function retrieveYears(item,index) {
 
 
 
-// function causes(){
+function causes(){
 
-//   var test = 0;
-//   console.log('test');
-//   for (var i = 0; i < causes.length; i++) {
-//     console.log(causes.length);
-//     for (var j in rawData){
-//       console.log('test');
-//       if (rawData[j].cause == causes[i]) {
-//         test = test + rawData[j].total;
-//       }
-//   }
+  var test = 0;
+  console.log('test');
+  for (var i = 0; i < causes.length; i++) {
+    console.log(causes.length);
+    for (var j in rawData){
+      //console.log('test');
+      if (rawData[j].cause == causes[i]) {
+        test = test + rawData[j].total;
+      }
+  }
 
-//   var testItem = {[cause]: causes[i], [total]: test};
-//   causeTotal.push(testItem);
-//   console.log(causeTotal);
-//   }
+  var testItem = {[cause]: causes[i], [total]: test};
+  causeTotal.push(testItem);
+  console.log(causeTotal);
+  }
 
-// }
+}
 
-// causes();
+causes();
 
 //console.log(causeTotal);
 
