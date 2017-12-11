@@ -2,6 +2,9 @@
 
 // Retrieve Raw Data
 var rawData = [];
+var stateDate = [];
+var yearData = [];
+var causeData = [];
 
 // Get Raw Data 
 function retrieveRawData() {
@@ -13,7 +16,8 @@ function retrieveRawData() {
       for(var i=0; i< data.length; i++){
         var dataItem = data[i];
         var updatedItem = {
-          'year':Number(dataItem[8]), 
+          'year': Number(dataItem[8]), 
+          'category': dataItem[9],
           'cause': dataItem[10],
           'state': dataItem[11],
           'total': Number(dataItem[12])
@@ -21,21 +25,50 @@ function retrieveRawData() {
 
         rawData.push(updatedItem);
      };
-     // console.log(rawData);
-     console.log('state data test:', getStates(rawData));
+     console.log('state data:', getStateData(rawData));
+     console.log('year data:', getYearData(rawData));
+     console.log('cause data:', getCauseData(rawData));
   });
-
     return rawData;
-
 }
 
 retrieveRawData();
 
+function getYearData(rawData){
+  var distinctYears = {};
+  var years = [];
 
-function getStates(rawData){
+  for(var i = 0; i < rawData.length; i++){
+    if(!distinctYears[rawData[i].year]){
+      years.push(rawData[i].year);
+      distinctYears[rawData[i].year] = rawData[i].total;
+    }
+    else {
+      distinctYears[rawData[i].year] += rawData[i].total;
+    }
+  }
+  return distinctYears;
+}
+
+function getCauseData(rawData){
+  var distinctCauses = {};
+  var causes = [];
+
+  for(var i = 0; i < rawData.length; i++){
+    if(!distinctCauses[rawData[i].cause]){
+      causes.push(rawData[i].cause);
+      distinctCauses[rawData[i].cause] = rawData[i].total;
+    }
+    else {
+      distinctCauses[rawData[i].cause] += rawData[i].total;
+    }
+  }
+  return distinctCauses;
+}
+
+function getStateData(rawData){
   var distinctStates = {};
   var states = [];
-  var state_data = [];
 
   for(var i = 0; i < rawData.length; i++){
     if(!distinctStates[rawData[i].state]){
@@ -46,27 +79,11 @@ function getStates(rawData){
       distinctStates[rawData[i].state] += rawData[i].total;
     }
   }
-  console.log(states);
-  console.log('with total', distinctStates);
-  
-  // for(var i = 0; i < states.length; i++){
-  //   var total = 0;
-  //   var state_item = {'state': states[i], 'total': total}
-
-  //   for (var j = 0; j < rawData.length; j++){
-  //     //console.log(rawData[j]);
-  //     if(states[i] = rawData[j].state){
-  //       total = total + rawData[j].total;
-  //       // console.log(total);
-  //     }
-  //   }
-
-  //   state_item.total = total;
-  //   state_data.push(state_item);
-  // }
-
   return distinctStates;
 }
+
+//console.log(distinctStates);
+
 
 
 
