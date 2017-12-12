@@ -5,6 +5,7 @@ var rawData = [];
 var stateData = [];
 var yearData = [];
 var causeData = [];
+var stateYearData = []
 
 // Unique Values
 var years = [];
@@ -38,6 +39,7 @@ function retrieveRawData() {
      causeData = getCauseData(rawData);
 
     causeVisual();
+    addCauseEventListeners();
     //test();
     //console.log(causeData);
     //console.log(rawData);
@@ -61,6 +63,7 @@ function getYearData(rawData){
       distinctYears[rawData[i].year] += rawData[i].total;
     }
   }
+  return years;
   return distinctYears;
 }
 
@@ -93,10 +96,26 @@ function getStateData(rawData){
       distinctStates[rawData[i].state] += rawData[i].total;
     }
   }
+  return states;
   return distinctStates;
 }
 
+function stateCauseData(cause) {
 
+  for(var i=0; i< states.length; i++){
+    var stateObject = {'state': states[i]};
+      for(var j=0; j< rawData.length;j++){
+          if(rawData[j].state === states[i] && rawData[j].cause === cause){
+              var year = rawData[j].year;
+              stateObject[year] = rawData[j].total;
+          }
+      }
+    stateYearData.push(stateObject);
+  }
+  
+  //console.log(stateYearData);
+  return stateYearData;
+}
 
 
 
