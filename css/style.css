@@ -1,5 +1,6 @@
 body {
-  font: 10px sans-serif;
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
 }
 
 .axis path,

@@ -45,7 +45,7 @@ function visualtest(){
 		.attr( "y", function(d){
 			return h - d; // Set y coordinate for each bar to height minus the data value
 		})
-		.attr( "width", 20 )
+		.attr( "width", 10 )
 		.attr( "height", function(d){
 			return d; // Set height of rectangle to data value
 		})
@@ -53,7 +53,7 @@ function visualtest(){
 
 	  svg.append("text")
       .attr("x", barWidth / 2)
-      .attr("y", function(d) { return y(d.value) + 3; })
+      .attr("y", function(d) { return y(d.value); })
       .attr("dy", ".75em")
       .text(function(d) { return d.value; });
 		// console.log(Object.values(stateData));
