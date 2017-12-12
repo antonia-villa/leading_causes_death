@@ -37,7 +37,7 @@ function retrieveRawData() {
      yearData = getYearData(rawData);
      causeData = getCauseData(rawData);
 
-    visualtest();
+    stateVisual();
     return rawData;
   });
 }

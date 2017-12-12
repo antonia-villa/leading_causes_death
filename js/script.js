@@ -1,4 +1,10 @@
-function visualtest(){
+//Global fuction to reformat numbers
+var nf = new Intl.NumberFormat();
+
+function stateVisual(){
+
+  //Append Header
+  $( "#visualHeading" ).append( "<h2>Distribution of Deaths by State</h2>" );
 
   // Retrieve data values
   var data = Object.values(stateData).map(function(v) {
@@ -13,17 +19,9 @@ function visualtest(){
   // Get Max Value in data set for y-axis scaling
   let max = data.reduce(function(a, b) {return Math.max(a, b);});
 
-  console.log(data);
-  console.log(label);
-  console.log(max);
-
   var margin = {top: 20, right: 20, bottom: 70, left: 40},
       width = 1000 - margin.left - margin.right,
       height = (max + 100) - margin.top - margin.bottom;
-
-  //Width and height of SVG
-  //var width = 800;
-  //var height = max + 100;
 
   var barWidth = (width-100) / data.length;
 
@@ -44,6 +42,14 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(10);
 
+// Create tool tip
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Deaths:</strong> <span style='color:red'>" + nf.format((d*10000)) + "</span>";
+  })
+
 
 // add the SVG element
 var svg = d3.select("body")
@@ -53,6 +59,9 @@ var svg = d3.select("body")
   .append("g")
   .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
+
+// call tooltip
+  svg.call(tip);
 
   x.domain(label.map(function(d) { return d; }));
   y.domain([0, d3.max(data, function(d) { return d; })]);
@@ -86,9 +95,7 @@ var svg = d3.select("body")
       .append("rect")
       .attr("class", "bar")
       .attr( "x", function(d,i){
-      return (i*18)+10; // Set x coordinate of rectangle to index of data value (i)*25.
-      // Add 30 to account for our left margin.
-      })
+      return (i*18)+10;})
       .attr( "y", function(d){
       return height - d; // Set y coordinate for each bar to height minus the data value
       })
@@ -96,8 +103,10 @@ var svg = d3.select("body")
       .attr( "height", function(d){
       return d; // Set height of rectangle to data value
       })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
 
-  }
+}
 
 
 
