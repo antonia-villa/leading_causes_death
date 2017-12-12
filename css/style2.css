@@ -1,6 +1,9 @@
 body {
   font-family: 'Barlow', sans-serif;
-  font-size: 10px;
+  margin: auto;
+  position: relative;
+  padding: 20px;
+  height: 100%;
 }
 
 h1 {
@@ -16,58 +19,30 @@ h2 {
     margin-bottom: 10px;
 }
 
-#chart {
-  background: #fff;
-  font-family: 'Barlow', sans-serif;
+form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+ .node {
+    border: solid 1px white;
+    line-height: 0.95;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 6px;
+    background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+    background-image:    -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+    background-image:     -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+    background-image:      -o-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+    background-image:         linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0)); 
+    text-shadow: -1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px 1px 2px hsla(0,0%,100%,0.25),
+        1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px 0px 2px hsla(0,0%,100%,0.25),
+        1px 0px 2px hsla(0,0%,100%,0.25);
 }
 
-.title {
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-    margin-top: 6px;
-    margin-bottom: 6px;
-}
-text {
-  pointer-events: none;
-}
-
-.grandparent text {
-  font-weight: bold;
-}
-
-rect {
-  fill: none;
-  stroke: #fff;
-}
-
-rect.parent,
-.grandparent rect {
-  stroke-width: 2px;
-}
-
-rect.parent {
-    pointer-events: none;
-}
-
-.grandparent rect {
-  fill: orange;
-}
-
-.grandparent:hover rect {
-  fill: #ee9700;
-}
-
-.children rect.parent,
-.grandparent rect {
-  cursor: pointer;
-}
-
-.children rect.parent {
-  fill: #bbb;
-  fill-opacity: .5;
-}
-
-.children:hover rect.child {
-  fill: #bbb;
+.node div {
+   padding: 6px 4%;
 }
