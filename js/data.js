@@ -38,6 +38,7 @@ function retrieveRawData() {
      causeData = getCauseData(rawData);
 
     stateVisual();
+    console.log(rawData);
     return rawData;
   });
 }

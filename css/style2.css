@@ -1,0 +1,73 @@
+body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+}
+
+h1 {
+	font-size: 32px;
+	margin: 0;
+}
+
+h2 {
+	/*font-family: 'Barlow';*/
+    font-weight: 100;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#chart {
+  background: #fff;
+  font-family: 'Barlow', sans-serif;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+text {
+  pointer-events: none;
+}
+
+.grandparent text {
+  font-weight: bold;
+}
+
+rect {
+  fill: none;
+  stroke: #fff;
+}
+
+rect.parent,
+.grandparent rect {
+  stroke-width: 2px;
+}
+
+rect.parent {
+    pointer-events: none;
+}
+
+.grandparent rect {
+  fill: orange;
+}
+
+.grandparent:hover rect {
+  fill: #ee9700;
+}
+
+.children rect.parent,
+.grandparent rect {
+  cursor: pointer;
+}
+
+.children rect.parent {
+  fill: #bbb;
+  fill-opacity: .5;
+}
+
+.children:hover rect.child {
+  fill: #bbb;
+}
