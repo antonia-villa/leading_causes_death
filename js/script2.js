@@ -1,5 +1,6 @@
 
 // Data Visualizations 
+var children = [];
 
 // Cause Data Visual
 function causeVisual(){
@@ -20,7 +21,6 @@ function causeVisual(){
 	}
 
 	//Reformat Data for tree structure
-	var children = [];
 	for(keys in causeData){
 		var child = {
 			'cause': keys,
@@ -40,7 +40,7 @@ function causeVisual(){
 
 	// Set Overall Visual size
 	var width = 950,
-	    height = 600,
+	    height = 500,
 	    color = d3.scale.category20c(),
 	    div = d3.select("body")
 	    		.append("div")
@@ -70,7 +70,9 @@ function causeVisual(){
 	          // compute font size based on sqrt(area)
 	          return Math.max(8, 0.18*Math.sqrt(d.area))+'px'; })
 	      	.text(function(d) { return d.children ? null : d.cause; })
-	      	.style("text-align", "center");;
+	      	.style("text-align", "center");
+
+	return children;
 }
 
 // To set positions for Cause Data Visual main style 
@@ -84,8 +86,7 @@ function position() {
 
 
 
-
-function nodeClicked() {
+function nodeClicked(cause) {
 	// Retrieve Data set based on cause clicked
 
 	var data = stateCauseData(cause);
@@ -173,6 +174,7 @@ function nodeClicked() {
 	  .attr("class", "total")
 	  .style("fill", function(d, i) { return colors[i]; });
 
+	 // Draw Bar graph
 	var rect = groups.selectAll("rect")
 	  .data(function(d) { return d; })
 	  .enter()
@@ -237,23 +239,42 @@ function nodeClicked() {
 
 function addCauseEventListeners() {
 	var causes = document.querySelectorAll('.node');
-
+	console.log(children);
 	for(var i =0; i < causes.length; i++){
 		causes[i].addEventListener('click', function(){
-			var test = this.id;
-			console.log(test);
+			var cause = this.id;
 			$('#myModal').modal('show');
-			$('#modalHeaderText').text('test');
-			//document.getElementById('modalHeaderText').innerHTML = "Of the total deaths since 1999, what percent of the total do " + test + " account for?";
-
-				//DO STUFF
-				               // initializes and invokes show immediately
-			nodeClicked;
+			$('#modalHeaderText').text('What percentage of total deaths does <strong>' + cause + '</strong> account for:');
+			
+			evaluateGuess(cause);
 	})
 
 	}
 }
 
+// Evaluate Guess
+
+function evaluateGuess(cause){
+	$("#submit").click(function(e){
+
+		e.preventDefault();
+        var guess = $("#guess").val(); 
+        var correctPercent =0; 
+
+        for(var i = 0; i< children.length; i++){
+        	if(children[i].cause === cause){
+        		correctPercent = children[i].percent
+        	}
+		}
+
+		if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
+			$('#myModal').modal('hide');
+			nodeClicked(cause);
+		} else {
+			alert('try again');
+		}
+	})
+}
 
 
 

@@ -35,15 +35,15 @@ function retrieveRawData() {
         rawData.push(updatedItem);
       }
      };
+
+     // Create sub-data sets
      stateData = getStateData(rawData);
      yearData = getYearData(rawData);
      causeData = getCauseData(rawData);
 
+    // load visual data
     causeVisual();
     addCauseEventListeners();
-    //test();
-    //console.log(causeData);
-    //console.log(rawData);
     return rawData;
   });
 }
@@ -112,14 +112,11 @@ function stateCauseData(cause) {
               stateObject[year] = rawData[j].total;
               stateTotal = stateTotal + rawData[j].total;
               stateObject['total'] = stateTotal
-          
           }
       }
-
     stateYearData.push(stateObject);
   }
 
-  //console.log(stateYearData);
   return stateYearData;
 }
 

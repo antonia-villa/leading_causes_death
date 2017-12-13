@@ -24,12 +24,16 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="modalHeaderText">What percent of total deaths are attributed to ?</h4>
+          <h4 class="modal-title" id="modalHeaderText"></h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <form>
+          	<input type="number" id ="guess" value="80">
+          	<input type="submit" value="Submit" id="submit">
+          </form>
         </div>
         <div class="modal-footer">
+       	<p> Note: The data set contains data from 1999-2015 for all of the United States.</p>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
