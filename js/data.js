@@ -119,7 +119,7 @@ function stateCauseData(cause) {
     stateYearData.push(stateObject);
   }
 
-  console.log(stateYearData)
+  //console.log(stateYearData);
   return stateYearData;
 }
 
