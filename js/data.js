@@ -13,6 +13,25 @@ var years = [];
 var causes = [];
 var states = [];
 
+// Load Page Content
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.getElementById('introText').style.display = 'block';
+  document.getElementById('dataVisual').style.display = 'none';
+  loadVisual();
+});
+
+
+function loadVisual(){
+  $("#enterPage").click(function(e){
+      e.preventDefault();
+    document.getElementById('introText').style.display = 'none';
+    document.getElementById('dataVisual').style.display = 'block';
+      retrieveRawData();
+  })
+}
+
+
 // Get Raw Data 
 function retrieveRawData() {
  
@@ -47,9 +66,6 @@ function retrieveRawData() {
     return rawData;
   });
 }
-
-// Create data sets
-retrieveRawData();
 
 // Create Year Data Set
 function getYearData(rawData){
