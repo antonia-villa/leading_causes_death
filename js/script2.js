@@ -1,16 +1,32 @@
 
+// Data Visualizations 
+
+// Cause Data Visual
 function causeVisual(){
 
-// Append Sub-Heading
+	// Append Sub-Heading
 	document.getElementById('subHeading').innerHTML = "From 1999 through 2015";
 
-  //Reformat Data
+	// create grandtotal of deaths 
+	var grandTotal = 0;
+	// console.log(causeData);
+	// console.log(Object.keys(causeData));
+	//Object.keys(obj))
+
+	for (var keys in causeData) {
+		if(keys != 'All Causes'){
+			grandTotal += causeData[keys];
+		}
+	}
+
+	//Reformat Data for tree structure
 	var children = [];
-	for( keys in causeData){
-  	var child = {
-  		'cause': keys,
-  		'total': (causeData[keys]/1000)
-  		}
+	for(keys in causeData){
+		var child = {
+			'cause': keys,
+			'percent': Math.round(((causeData[keys]/grandTotal)*100)),
+			'total': causeData[keys]
+		}
 	  	if(child.cause != 'All Causes'){
 			children.push(child);
 		}
@@ -22,7 +38,8 @@ function causeVisual(){
 	    children: children
 	};
 
-	var width = 900,
+	// Set Overall Visual size
+	var width = 950,
 	    height = 600,
 	    color = d3.scale.category20c(),
 	    div = d3.select("body")
@@ -30,11 +47,14 @@ function causeVisual(){
 	    		.attr("id", "causeVisual")
 	       		.style("position", "relative");
 
-	var treemap = d3.layout.treemap()
+	// Extract data
+	var treemap = d3.layout
+		.treemap()
 	    .size([width, height])
 	    .sticky(true)
 	    .value(function(d) { return d.total; });
-	 
+	
+	// Define individual node
 	var node = div.datum(tree)
 			.selectAll(".node")
 	      	.data(treemap.nodes)
@@ -51,10 +71,9 @@ function causeVisual(){
 	          return Math.max(8, 0.18*Math.sqrt(d.area))+'px'; })
 	      	.text(function(d) { return d.children ? null : d.cause; })
 	      	.style("text-align", "center");;
-
 }
 
-// To set positions for main style 
+// To set positions for Cause Data Visual main style 
 function position() {
   this.style("left", function(d) { return d.x + "px"; })
       .style("top", function(d) { return d.y + "px"; })
