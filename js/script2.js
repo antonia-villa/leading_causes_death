@@ -81,14 +81,13 @@ function position() {
       .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
 }
 
-// 
+
+
+
 
 function nodeClicked() {
-	console.log('click');
-
-
 	// Retrieve Data set based on cause clicked
-	var cause = this.id
+
 	var data = stateCauseData(cause);
 	console.log(data);
 
@@ -96,11 +95,6 @@ function nodeClicked() {
 	document.getElementById('causeVisual').style.display = 'none';
 	document.getElementById('visualHeading').innerHTML = "Cause of Death " + cause;
 	document.getElementById('subHeading').innerHTML = "By State and Year";
-
-	// var margin = {top: 20, right: 20, bottom: 70, left: 40};
-
-	// var width = 1000 - margin.left - margin.right,
- //    	height = 500 - margin.top - margin.bottom;
 
 
 	var margin = {top: 20, right: 160, bottom: 60, left: 40};
@@ -117,20 +111,9 @@ function nodeClicked() {
 	  .append("g")
 	  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
-	// Sort years
-
-	// var sortedYears = years.sort(function(a, b) {
- //  		return a - b;
-	// });
-	// console.log(sortedYears);
-
 	years.sort(function(a, b) {
   		return a - b;
 	});
-	console.log(years);
-
-// [1, 2, 3, 4, 5]
 
 
 	  // Transpose the data into layers
@@ -139,8 +122,6 @@ function nodeClicked() {
     		return {x: d.state, y: +d[year]/d.total, z: year};
  		});
 	}));
-
-	console.log(dataset);
 
 	// Set x, y and colors
 	var x = d3.scale.ordinal()
@@ -258,7 +239,18 @@ function addCauseEventListeners() {
 	var causes = document.querySelectorAll('.node');
 
 	for(var i =0; i < causes.length; i++){
-		causes[i].addEventListener('click', nodeClicked);
+		causes[i].addEventListener('click', function(){
+			var test = this.id;
+			console.log(test);
+			$('#myModal').modal('show');
+			$('#modalHeaderText').text('test');
+			//document.getElementById('modalHeaderText').innerHTML = "Of the total deaths since 1999, what percent of the total do " + test + " account for?";
+
+				//DO STUFF
+				               // initializes and invokes show immediately
+			nodeClicked;
+	})
+
 	}
 }
 

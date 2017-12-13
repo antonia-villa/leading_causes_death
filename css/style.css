@@ -53,7 +53,7 @@ form {
 /*********************/
 /*   Modal Styling   */
 /*********************/
-.modal {
+/*.modal {
         position: fixed;
         left: 0;
         top: 0;
@@ -92,4 +92,4 @@ form {
         visibility: visible;
         transform: scaleX(1.0) scaleY(1.0);
         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-    }
+    }*/
