@@ -51,11 +51,11 @@ form {
 }
 
 #footerText {
-  margin-top: 200px;
+  margin-top: 140px;
 }
 
 a {
-   color: inherit; 
+  color: inherit; 
   text-decoration: inherit; 
 }
 
@@ -74,27 +74,38 @@ a {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+/* Cause Data Visualization Styling */
+#visualHeading {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#subHeading {
+  font-style: italic;
+  font-size: 17px;
+  margin-bottom: 20px;
+  color: #56504e;
+}
+
+#dataVisualText{
+  margin-bottom: 30px;
+}
+
 
 /*********************/
 /*Tree Visual Styling*/
 /*********************/
  .node {
-    border: solid 1px white;
-    line-height: 0.95;
+    border: solid .5px white;
     overflow: hidden;
     position: absolute;
-    border-radius: 6px;
+    top: 50%;
+    border-radius: 1px;
     background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:    -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:     -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:      -o-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:         linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0)); 
-    text-shadow: -1px -1px 2px hsla(0,0%,100%,0.25),
-        -1px -1px 2px hsla(0,0%,100%,0.25),
-        -1px 1px 2px hsla(0,0%,100%,0.25),
-        1px -1px 2px hsla(0,0%,100%,0.25),
-        -1px 0px 2px hsla(0,0%,100%,0.25),
-        1px 0px 2px hsla(0,0%,100%,0.25);
 }
 
 .node div {

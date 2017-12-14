@@ -6,14 +6,13 @@ var children = [];
 function causeVisual(){
 
 	// Append Sub-Heading
-	document.getElementById('subHeading').innerHTML = "From 1999 through 2015";
+	document.getElementById('visualHeading').innerHTML = "<strong>Percent Distribution by cause:</strong> For all states from 1999 through 2015";
+	 document.getElementById('subHeading').innerHTML = "<span style='text-transform: uppercase'>Click</span> on a cause and take an educated guess as to what percent of the total deaths it accounts for";
+// document.getElementById('subHeading').innerHTML ="<span style='text-transform: uppercase'>John Doe</span>"
 
-	// create grandtotal of deaths 
+
+	// create Grandtotal of deaths for % distribution
 	var grandTotal = 0;
-	// console.log(causeData);
-	// console.log(Object.keys(causeData));
-	//Object.keys(obj))
-
 	for (var keys in causeData) {
 		if(keys != 'All Causes'){
 			grandTotal += causeData[keys];
@@ -53,6 +52,9 @@ function causeVisual(){
 	    .size([width, height])
 	    .sticky(true)
 	    .value(function(d) { return d.total; });
+
+	// Define function that returns color for data point
+	var colors = ['#9CABB4', '#2D3234', '#B4B4B4', '#343434', '#707B81', '#0A1934', '#173773', '#C5C6C2', '#464645', '#929390', '#6F7376', '#F37A4D', '#C0603D', '#735347', '#0D10A6', '#A2C8F3', '#475873', '#96B9F3', '#202734']
 	
 	// Define individual node
 	var node = div.datum(tree)
@@ -63,12 +65,14 @@ function causeVisual(){
 	      	.attr("class", "node")
 	      	.attr("id", function(d) { return d.cause; })
 	      	.call(position)
-	      	.style("background-color", function(d) {
-	          return d.cause == 'tree' ? '#fff' : color(d.cause); })
+	      	// .style("background-color", function(d) {
+	       //    return d.cause == 'tree' ? '#fff' : color(d.cause); })
+
+	       .style("background-color",colors[i])
 	      	.append('div')
 	      	.style("font-size", function(d) {
 	          // compute font size based on sqrt(area)
-	          return Math.max(8, 0.18*Math.sqrt(d.area))+'px'; })
+	          return Math.max(8, 0.15*Math.sqrt(d.area))+'px'; })
 	      	.text(function(d) { return d.children ? null : d.cause; })
 	      	.style("text-align", "center");
 
