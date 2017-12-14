@@ -20,7 +20,7 @@
 	<input type="submit" class="btn btn-primary" value="Learn more" id="enterPage">
 	<div id="footerText">
 		<p>Author: Antonia Villa</p>
-		<p id="datasource"> Data is provided by <a href="https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013">Open Data Project</a></p>
+		<p id="datasource"> Data is provided by <a href="https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013"><strong>Open Data Project</strong></a></p>
 	</div>
 </div>
 
@@ -38,14 +38,16 @@
 	          <h4 class="modal-title" id="modalHeaderText"></h4>
 	        </div>
 	        <div class="modal-body">
-	          <form>
+	        <div id = "interactionInstructions">
+	        </div>
+	          <form id="guessForm">
 	          	<input type="number" id ="guess" value="80">
 	          	<input type="submit" value="Submit" id="submit">
 	          </form>
 	        </div>
 	        <div class="modal-footer">
-	       	<p> Note: The data set contains data from 1999-2015 for all of the United States.</p>
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	         </div>
 	        </div>
 	      </div>
 	    </div>

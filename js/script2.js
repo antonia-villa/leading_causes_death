@@ -2,13 +2,63 @@
 // Data Visualizations 
 var children = [];
 
+function addCauseEventListeners() {
+	var causes = document.querySelectorAll('.node');
+	console.log(children);
+	for(var i =0; i < causes.length; i++){
+		causes[i].addEventListener('click', function(){
+			var cause = this.id;
+			$('#myModal').modal('show');
+			$('#interactionInstructions').css("display","none");
+			$('#guessForm').css("display","block");
+			$('#modalHeaderText').text('What percentage of total deaths does ' + cause + ' account for:');
+			// document.getElementById('guessForm').style.display = 'visible';
+			
+			evaluateGuess(cause);
+	})
+
+	}
+}
+
+// Evaluate Guess
+
+function evaluateGuess(cause){
+	$("#submit").click(function(e){
+
+		e.preventDefault();
+        var guess = $("#guess").val(); 
+        var correctPercent =0; 
+
+        for(var i = 0; i< children.length; i++){
+        	if(children[i].cause === cause){
+        		correctPercent = children[i].percent
+        	}
+		}
+
+		if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
+			$('#myModal').modal('hide');
+			console.log('test case');
+			nodeClicked(cause);
+		} else {
+			alert('try again');
+		}
+	})
+}
+
+
 // Cause Data Visual
 function causeVisual(){
 
 	// Append Sub-Heading
 	document.getElementById('visualHeading').innerHTML = "<strong>Percent Distribution by cause:</strong> For all states from 1999 through 2015";
-	 document.getElementById('subHeading').innerHTML = "<span style='text-transform: uppercase'>Click</span> on a cause and take an educated guess as to what percent of the total deaths it accounts for";
-// document.getElementById('subHeading').innerHTML ="<span style='text-transform: uppercase'>John Doe</span>"
+    //document.getElementById('guessForm').style.display = 'none';
+    $('#guessForm').css("display","none");
+    $('#myModal').modal('show');
+    
+    $('#modalHeaderText').text('How to interact with this visual and reveal more data:');
+    $("#interactionInstructions").append('<p id="text1">The data displayed represents a distribution of the total number of deaths from 1999 - 2015 for all of the United States by cause. There is a lot of valuable knowledge to be gained viewing the data at high level and even more learnings at a granual level. Year and state have a casual effect. </p>');
+    $("#interactionInstructions").append('<p id="text2"><span style="text-transform: uppercase; font-weight: bold; font-size: 20px">Click</span> on a cause and guess the approximate percentage it accounts for within the total distribution.</p>');
+    $("#interactionInstructions").append('<p id="text3">If you guess within a 5.0% margin of the true distribution, the distribution of deaths of the selected cause will be displayed by year and state.</p>');
 
 
 	// create Grandtotal of deaths for % distribution
@@ -68,7 +118,7 @@ function causeVisual(){
 	      	// .style("background-color", function(d) {
 	       //    return d.cause == 'tree' ? '#fff' : color(d.cause); })
 
-	       .style("background-color",colors[i])
+	       //.style("background-color",colors[i])
 	      	.append('div')
 	      	.style("font-size", function(d) {
 	          // compute font size based on sqrt(area)
@@ -241,44 +291,6 @@ function nodeClicked(cause) {
 }
 
 
-function addCauseEventListeners() {
-	var causes = document.querySelectorAll('.node');
-	console.log(children);
-	for(var i =0; i < causes.length; i++){
-		causes[i].addEventListener('click', function(){
-			var cause = this.id;
-			$('#myModal').modal('show');
-			$('#modalHeaderText').text('What percentage of total deaths does <strong>' + cause + '</strong> account for:');
-			
-			evaluateGuess(cause);
-	})
-
-	}
-}
-
-// Evaluate Guess
-
-function evaluateGuess(cause){
-	$("#submit").click(function(e){
-
-		e.preventDefault();
-        var guess = $("#guess").val(); 
-        var correctPercent =0; 
-
-        for(var i = 0; i< children.length; i++){
-        	if(children[i].cause === cause){
-        		correctPercent = children[i].percent
-        	}
-		}
-
-		if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
-			$('#myModal').modal('hide');
-			nodeClicked(cause);
-		} else {
-			alert('try again');
-		}
-	})
-}
 
 
 

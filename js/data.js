@@ -25,10 +25,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function loadVisual(){
   $("#enterPage").click(function(e){
-      e.preventDefault();
+
+
+    
+    e.preventDefault();
     document.getElementById('introText').style.display = 'none';
     document.getElementById('dataVisual').style.display = 'block';
-      retrieveRawData();
+    retrieveRawData();
+
   })
 }
 

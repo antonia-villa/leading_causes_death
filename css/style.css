@@ -23,7 +23,7 @@ p {
 }
 
 form {
-  position: absolute;
+  position: relative;
   right: 10px;
   top: 10px;
 }
@@ -56,7 +56,7 @@ form {
 
 a {
   color: inherit; 
-  text-decoration: inherit; 
+  text-decoration: underline; 
 }
 
 .btn {
@@ -91,6 +91,29 @@ a {
   margin-bottom: 30px;
 }
 
+/*********************/
+/* Instruction Modal */
+/*********************/
+#text1{
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#text2{
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#text3{
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#modalHeaderText{
+  font-size: 18px;
+  font-weight: bold;
+}
+
 
 /*********************/
 /*Tree Visual Styling*/
@@ -113,8 +136,6 @@ a {
 }
 
 /*********************/
-/*   Modal Styling   */
+/*Guess Modal Styling*/
 /*********************/
-form {
-  position: relative;
-}
+
