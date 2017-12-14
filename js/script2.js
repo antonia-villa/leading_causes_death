@@ -2,49 +2,6 @@
 // Data Visualizations 
 var children = [];
 
-function addCauseEventListeners() {
-	var causes = document.querySelectorAll('.node');
-	console.log(children);
-	for(var i =0; i < causes.length; i++){
-		causes[i].addEventListener('click', function(){
-			var cause = this.id;
-			$('#myModal').modal('show');
-			$('#interactionInstructions').css("display","none");
-			$('#guessForm').css("display","block");
-			$('#modalHeaderText').text('What percentage of total deaths does ' + cause + ' account for:');
-			// document.getElementById('guessForm').style.display = 'visible';
-			
-			evaluateGuess(cause);
-	})
-
-	}
-}
-
-// Evaluate Guess
-
-function evaluateGuess(cause){
-	$("#submit").click(function(e){
-
-		e.preventDefault();
-        var guess = $("#guess").val(); 
-        var correctPercent =0; 
-
-        for(var i = 0; i< children.length; i++){
-        	if(children[i].cause === cause){
-        		correctPercent = children[i].percent
-        	}
-		}
-
-		if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
-			$('#myModal').modal('hide');
-			console.log('test case');
-			nodeClicked(cause);
-		} else {
-			alert('try again');
-		}
-	})
-}
-
 
 // Cause Data Visual
 function causeVisual(){
@@ -115,8 +72,8 @@ function causeVisual(){
 	      	.attr("class", "node")
 	      	.attr("id", function(d) { return d.cause; })
 	      	.call(position)
-	      	// .style("background-color", function(d) {
-	       //    return d.cause == 'tree' ? '#fff' : color(d.cause); })
+	      	.style("background-color", function(d) {
+	           return d.cause == 'tree' ? '#fff' : color(d.cause); })
 
 	       //.style("background-color",colors[i])
 	      	.append('div')
@@ -129,6 +86,69 @@ function causeVisual(){
 	return children;
 }
 
+
+
+function addCauseEventListeners() {
+	var causes = $('.node');
+	for(var i =0; i < causes.length; i++){
+		causes[i].addEventListener('click', function(){
+			var cause = this.id;
+			$('#myModal').modal('show');
+			$('#interactionInstructions').css("display","none");
+			$('#guessForm').css("display","block");
+			$('#modalHeaderText').text('What percentage of total deaths does ' + cause + ' account for:');
+			// document.getElementById('guessForm').style.display = 'visible';
+			
+			submitGuess(cause);
+	})
+	}
+}
+
+// Evaluate Guess
+function submitGuess(cause){
+	var count = 0;
+	$("#submit").click(function(e){
+		e.preventDefault();
+		count++;
+		console.log(count);
+        var guess = $("#guess").val(); 
+		evaluateGuess(guess, cause);
+		
+		//return false;
+	})
+}
+
+function evaluateGuess(guess, cause){
+
+    var correctPercent = 0; 
+
+    for(var i = 0; i< children.length; i++){
+    	if(children[i].cause === cause){
+    		correctPercent = children[i].percent;
+    	}
+	}
+	console.log('cause', cause);
+	console.log('guess', guess);
+	console.log('actual', correctPercent);
+
+	if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
+		console.log('guess was within 5%');
+		hideModal();
+		nodeClicked(cause);
+	} else {
+		console.log('wrong');
+	}
+
+}
+
+function hideModal(){
+  $(".modal").removeClass("in");
+  $(".modal-backdrop").remove();
+  $('body').removeClass('modal-open');
+  $('body').css('padding-right', '');
+  $("#myModal").remove();
+}
+
 // To set positions for Cause Data Visual main style 
 function position() {
   this.style("left", function(d) { return d.x + "px"; })
@@ -138,10 +158,11 @@ function position() {
 }
 
 
-
+var countofdatavisual=0;
 
 function nodeClicked(cause) {
 	// Retrieve Data set based on cause clicked
+	countofdatavisual++;
 
 	var data = stateCauseData(cause);
 	console.log(data);
