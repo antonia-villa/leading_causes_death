@@ -13,11 +13,12 @@ var years = [];
 var causes = [];
 var states = [];
 
-// Load Page Content
+// Load Introductory Page
 document.addEventListener("DOMContentLoaded", function() {
 
   document.getElementById('introText').style.display = 'block';
   document.getElementById('dataVisual').style.display = 'none';
+  
   loadVisual();
 });
 

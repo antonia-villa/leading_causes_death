@@ -1,14 +1,14 @@
+/* Main Styling */
 body {
   font-family: 'Barlow', sans-serif;
   margin: auto;
   position: relative;
-  padding: 20px;
+  margin: 20px;
   height: 100%;
 }
 
 h1 {
-  font-size: 32px;
-  margin: 0;
+  font-size: 40px;
 }
 
 h2 {
@@ -18,11 +18,62 @@ h2 {
     margin-bottom: 10px;
 }
 
+p {
+  margin: 0;
+}
+
 form {
   position: absolute;
   right: 10px;
   top: 10px;
 }
+
+/* Introduction Page */
+.dataDescription{
+  text-align: justify;
+  line-height: 160%;
+  margin-top: 50px;
+  margin-right: 200px;
+  margin-bottom: 35px;
+}
+
+#datasource {
+  margin: 0;
+  border: 0;
+  font-size: 12px;
+  font-style: italic;
+}
+
+#introHeading {
+  width: 100%;
+  text-align: justify;
+  margin-right: 200px;
+}
+
+#footerText {
+  margin-top: 200px;
+}
+
+a {
+   color: inherit; 
+  text-decoration: inherit; 
+}
+
+.btn {
+  font-size: 15px;
+  padding: 15px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+#enterPage:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 
 /*********************/
 /*Tree Visual Styling*/
