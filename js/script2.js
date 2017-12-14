@@ -1,14 +1,13 @@
 
-// Data Visualizations 
-var children = [];
+// Cause Visual Data  
+var causeDataSet = [];
 
 
 // Cause Data Visual
 function causeVisual(){
 
 	// Append Sub-Heading
-	document.getElementById('visualHeading').innerHTML = "<strong>Percent Distribution by cause:</strong> For all states from 1999 through 2015";
-    //document.getElementById('guessForm').style.display = 'none';
+	$('#visualHeading').text('<strong>Percent Distribution by cause:</strong> For all states from 1999 through 2015');
     $('#guessForm').css("display","none");
     $('#myModal').modal('show');
     
@@ -34,14 +33,14 @@ function causeVisual(){
 			'total': causeData[keys]
 		}
 	  	if(child.cause != 'All Causes'){
-			children.push(child);
+			causeDataSet.push(child);
 		}
 	}
 
 	// Create Tree Structure
 	var tree = {
 	    cause: "tree",
-	    children: children
+	    children: causeDataSet
 	};
 
 	// Set Overall Visual size
@@ -83,7 +82,7 @@ function causeVisual(){
 	      	.text(function(d) { return d.children ? null : d.cause; })
 	      	.style("text-align", "center");
 
-	return children;
+	return causeDataSet;
 }
 
 
@@ -97,7 +96,6 @@ function addCauseEventListeners() {
 			$('#interactionInstructions').css("display","none");
 			$('#guessForm').css("display","block");
 			$('#modalHeaderText').text('What percentage of total deaths does ' + cause + ' account for:');
-			// document.getElementById('guessForm').style.display = 'visible';
 			
 			submitGuess(cause);
 	})
@@ -113,32 +111,37 @@ function submitGuess(cause){
 		console.log(count);
         var guess = $("#guess").val(); 
 		evaluateGuess(guess, cause);
-		
-		//return false;
 	})
 }
 
+
 function evaluateGuess(guess, cause){
 
+	// Retrieve correct percent distribution for selected cause
     var correctPercent = 0; 
-
     for(var i = 0; i< children.length; i++){
     	if(children[i].cause === cause){
     		correctPercent = children[i].percent;
     	}
 	}
-	console.log('cause', cause);
-	console.log('guess', guess);
-	console.log('actual', correctPercent);
 
+	// Check guess for correctness
 	if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
-		console.log('guess was within 5%');
+    	toastr.options.timeOut = 2000;
+    	toastr.success('Success messages');
 		hideModal();
 		nodeClicked(cause);
 	} else {
-		console.log('wrong');
+		// Calculate margin between guess and correct percentage
+		var margin = guess - correctPercent
+		if(margin > -10 && margin < 10){
+			toastr.options.timeOut = 2000; 
+			toastr.error('Try again! Your guess is within 10%!');
+		} else {
+			toastr.options.timeOut = 2000; 
+			toastr.error('Try again! Your guess was >10% off!');
+		}
 	}
-
 }
 
 function hideModal(){
