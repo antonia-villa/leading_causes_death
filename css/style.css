@@ -142,3 +142,13 @@ a {
 #toast-container > div {
   opacity: 1 !important; 
 }
+
+/**************************/
+/*Pop-up Visual Dialog Box*/
+/**************************/
+
+#dynamicModal {
+  font-family: 'Barlow', sans-serif;
+
+}
+

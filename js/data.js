@@ -145,13 +145,13 @@ function stateCauseData(cause) {
 }
 
 function stateYearDatabyCause(state) {
-  console.log('GOT INTO stateYearDatabyCause')
+  
   for(var i=0; i< stateYearData.length; i++){
-    var temp = stateYearData[i];
+    var tempData = stateYearData[i];
       if(stateYearData[i].state === state){
-         delete temp.state;
-         delete temp.total;
-         causebyStatebyYear = temp;
+         delete tempData.total;
+         delete tempData.state;
+         causebyStatebyYear = tempData;
       }
   }
   return causebyStatebyYear;
