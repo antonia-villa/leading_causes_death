@@ -12,9 +12,9 @@ function causeVisual(){
   $('#myModal').modal('show');
   
   $('#modalHeaderText').text('How to interact with this visual and reveal more data:');
-  $("#interactionInstructions").append('<p id="text1">The data displayed represents a distribution of the total number of deaths from 1999 - 2015 for all of the United States by cause. There is a lot of valuable knowledge to be gained viewing the data at high level and even more learnings at a granual level. Year and state have a casual effect. </p>');
-  $("#interactionInstructions").append('<p id="text2"><span style="text-transform: uppercase; font-weight: bold; font-size: 20px">Click</span> on a cause and guess the approximate percentage it accounts for within the total distribution.</p>');
-  $("#interactionInstructions").append('<p id="text3">If you guess within a 5.0% margin of the true distribution, the distribution of deaths of the selected cause will be displayed by year and state.</p>');
+  $('#interactionInstructions').append('<p id="text1">The data displayed represents a distribution of the total number of deaths from 1999 - 2015 for all of the United States by cause. There is a lot of valuable knowledge to be gained viewing the data at high level and even more learnings at a granual level. Year and state have a casual effect. </p>');
+  $('#interactionInstructions').append('<p id="text2"><span style="text-transform: uppercase; font-weight: bold; font-size: 20px">Click</span> on a cause and guess the approximate percentage it accounts for within the total distribution.</p>');
+  $('#interactionInstructions').append('<p id="text3">If you guess within a 5.0% margin of the true distribution, the distribution of deaths of the selected cause will be displayed by year and state.</p>');
 
 
   // create Grandtotal of deaths for % distribution
@@ -84,7 +84,6 @@ function causeVisual(){
   return causeDataSet;
 }
   
-  // var colorcount = 0;
 // To set position and area of boxes based on distribution for Cause Data Visual
 function position() {
 
@@ -92,70 +91,4 @@ function position() {
       .style("top", function(d) { return d.y + "px"; })
       .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
       .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
-}
-
-// Add event listeners to each cause in data set
-function addCauseEventListeners() {
-  var causes = $('.node');
-  for(var i =0; i < causes.length; i++){
-    causes[i].addEventListener('click', function(){
-      var cause = this.id;
-      $('#myModal').modal('show');
-      $('#modalHeaderText').text('Take a guess to see more data');
-      $('#text1').text('What percent of total deaths do you think ' + cause + ' account for?')  
-      $('#text2').css('display','none');
-      $('#text3').css('display','none');
-      $('#guessForm').css('display','block');
-      
-      submitGuess(cause);
-  })
-  }
-}
-
-// Submit guess
-function submitGuess(cause){
-  $("#submit").click(function(e){
-    e.preventDefault();
-        var guess = $("#guess").val(); 
-    evaluateGuess(guess, cause);
-  })
-}
-
-// Evaluate guess for correctness
-function evaluateGuess(guess, cause){
-
-  // Retrieve correct percent distribution for selected cause
-    var correctPercent = 0; 
-    for(var i = 0; i< causeDataSet.length; i++){
-      if(causeDataSet[i].cause === cause){
-        correctPercent = causeDataSet[i].percent;
-      }
-  }
-
-  // Calculate Margin in guess and correct distribution
-  var margin = guess - correctPercent
-
-  // Set ToastR timeout
-  toastr.options.timeOut = 2000;
-
-  if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
-      toastr.success('Success messages');
-    hideModal();
-    causeByStateByYear(cause);
-  } else {
-    if(margin > -10 && margin < 10){
-      toastr.warning('Try again! Your guess is within 10%!');
-    } else {
-      toastr.error('Try again! Your guess was >10% off!');
-    }
-  }
-}
-
-// Hide Modal upon correct guess
-function hideModal(){
-  $(".modal").removeClass("in");
-  $(".modal-backdrop").remove();
-  $('body').removeClass('modal-open');
-  $('body').css('padding-right', '');
-  $("#myModal").remove();
 }

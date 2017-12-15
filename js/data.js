@@ -1,34 +1,38 @@
 // DATA SOURCE: https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013
 
-// Data Sets
+// Reformated Raw Data
 var rawData = [];
+
+// Single Variable Datasets
 var stateData = [];
 var yearData = [];
 var causeData = [];
+
+// Multi-Variable Datasets
 var stateYearData = [];
 var stateYearDataAdjusted = [];
 var causebyStatebyYear =[];
 
-// Unique Values
+// Unique Values for legends 
 var years = [];
 var causes = [];
 var states = [];
 
 // Load Introductory Page
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
 
-  document.getElementById('introText').style.display = 'block';
-  document.getElementById('dataVisual').style.display = 'none';
+  $('#introText').css('display','block');
+  $('#dataVisual').css('display','none');
   
-  loadVisual();
+  loadCauseVisual();
 });
 
 
-function loadVisual(){
-  $("#enterPage").click(function(e){
+function loadCauseVisual(){
+  $('#enterPage').click(function(e){
     e.preventDefault();
-    document.getElementById('introText').style.display = 'none';
-    document.getElementById('dataVisual').style.display = 'block';
+    $('#introText').css('display','none');
+    $('#dataVisual').css('display','block');
     retrieveRawData();
   })
 }
@@ -39,8 +43,10 @@ function retrieveRawData() {
  
   $.get('https://data.cdc.gov/api/views/bi63-dtpu/rows.json?accessType=DOWNLOAD')
   .done(function(response) {
+
      var data = response.data;
-  
+    
+      // Restructure Data Set
       for(var i=0; i< data.length; i++){
         var dataItem = data[i];
 
@@ -52,6 +58,7 @@ function retrieveRawData() {
           'total': Number(dataItem[12])
         };
 
+        // Cleanse Data
         if(updatedItem.state != 'United States'){
         rawData.push(updatedItem);
       }
@@ -62,14 +69,16 @@ function retrieveRawData() {
      yearData = getYearData(rawData);
      causeData = getCauseData(rawData);
 
-    // Load Cause Visual
+    // Load First Visual: Least granular data set 
     causeVisual();
     addCauseEventListeners();
+
     return rawData;
   });
 }
 
 // Create Year Data Set
+// Aggregation of all deaths by year
 function getYearData(rawData){
   var distinctYears = [];
 
@@ -83,16 +92,17 @@ function getYearData(rawData){
     }
   }
 
-  // Sort years chronologically
+  // Sort years reverse chronologically
   years.sort(function(a, b) {
       return a - b;
-  });
+  }).reverse();
 
-  return years.reverse();
+  return years;
   return distinctYears;
 }
 
-// Create Year Cause Data Set
+// Create Overall Cause Data Set (used by visual_allCauses.js)
+// Aggregation of all deaths by Cause
 function getCauseData(rawData){
   var distinctCauses = [];
 
@@ -108,7 +118,8 @@ function getCauseData(rawData){
   return distinctCauses;
 }
 
-// Create State Cause Data Set
+// Create State Data Set
+// Aggregation of all deaths by State
 function getStateData(rawData){
   var distinctStates = [];
 
@@ -125,6 +136,8 @@ function getStateData(rawData){
   return distinctStates;
 }
 
+// Create Cause by State and Year Data Set (used by visual_cause_allStates_allYears.js)
+// Aggregation of all deaths by specific cause for all states and years
 function stateCauseData(cause) {
   for(var i=0; i< states.length; i++){
     var stateObject = {'state': states[i]};
@@ -140,10 +153,11 @@ function stateCauseData(cause) {
       }
     stateYearData.push(stateObject);
   }
-
   return stateYearData;
 }
 
+// Create Cause by State by Year data set (used by visual_cause_state_allYears.js)
+// Aggregation of all deaths by specific cause by specific state for all years
 function stateYearDatabyCause(state) {
   
   for(var i=0; i< stateYearData.length; i++){
