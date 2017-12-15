@@ -23,13 +23,19 @@ p {
   margin: 0;
 }
 
+a {
+  color: inherit; 
+  text-decoration: underline; 
+}
 
+/*********************/
 /* Introduction Page */
+/*********************/
 .dataDescription{
   text-align: justify;
   line-height: 160%;
   margin-top: 50px;
-  margin-right: 200px;
+  margin-right: 140px;
   margin-bottom: 35px;
 }
 
@@ -42,7 +48,6 @@ p {
 
 #introHeading {
   width: 100%;
-  text-align: justify;
   margin-right: 200px;
 }
 
@@ -50,14 +55,9 @@ p {
   margin-top: 140px;
 }
 
-a {
-  color: inherit; 
-  text-decoration: underline; 
-}
-
 .btn {
-  font-size: 15px;
-  padding: 15px 20px;
+  font-size: 16px;
+  padding: 12px 20px;
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
@@ -70,7 +70,9 @@ a {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+/************************************/
 /* Cause Data Visualization Styling */
+/************************************/
 #visualHeading {
   font-size: 24px;
   margin-bottom: 10px;
@@ -89,6 +91,7 @@ a {
 
 /*********************/
 /* Modal Formatting  */
+/* Cause Visual Modal*/
 /*********************/
 #text1{
   font-size: 16px;
@@ -97,17 +100,18 @@ a {
 
 #text2{
   font-size: 16px;
-  margin-bottom: 20px;
-}
-
-#text3{
-  font-size: 16px;
   margin-bottom: 10px;
 }
 
 #modalHeaderText{
-  font-size: 20px;
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: justify;
   font-weight: bold;
+}
+
+#guessInstructions{
+  font-size: 16px;
 }
 
 
@@ -134,7 +138,6 @@ a {
 /*********************/
 /*Guess Modal Styling*/
 /*********************/
-
 .toast {
   opacity: 1 !important;
 }
