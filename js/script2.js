@@ -315,23 +315,15 @@ function causeByStateByYear(cause) {
 
 // Add event listeners to each cause in data set
 function addStateEventListeners(d) {
-
 			var state = d.x;
 			console.log(state);
-			var test = stateYearDatabyCause(state);
-			return test;
-	
+			var stateSpecificData = stateYearDatabyCause(state);
+			return stateSpecificData;
 }
-// function clickHandler(d, i) {
-//     // d is the datum
-//     // i is the index
-//     // this is the reference to the current element
-//     // d3.event is the reference to the current event
-// }
 
-
-function stateYearDataVisual(test){
+// Create State Year Specific Data
+function stateYearDataVisual(stateSpecificData){
 	// var test = stateYearDatabyCause(state);
-	console.log(test);
+	console.log(stateSpecificData);
 }
 

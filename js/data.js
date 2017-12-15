@@ -7,7 +7,7 @@ var yearData = [];
 var causeData = [];
 var stateYearData = [];
 var stateYearDataAdjusted = [];
-var stateYearData =[];
+var causebyStatebyYear =[];
 
 // Unique Values
 var years = [];
@@ -147,20 +147,14 @@ function stateCauseData(cause) {
 function stateYearDatabyCause(state) {
   console.log('GOT INTO stateYearDatabyCause')
   for(var i=0; i< stateYearData.length; i++){
-
+    var temp = stateYearData[i];
       if(stateYearData[i].state === state){
-        Object.keys(stateYearData[i]).forEach(function(key){
-          if(isNaN(key)){
-            stateYearData.push(stateYearData[i]);
-            console.log(stateYearData[i]);
-          }
-        })
-
+         delete temp.state;
+         delete temp.total;
+         causebyStatebyYear = temp;
       }
-    //stateYearData.push(stateObject);
   }
-
-  return stateYearData;
+  return causebyStatebyYear;
 }
 
 
