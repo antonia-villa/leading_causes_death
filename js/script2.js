@@ -107,7 +107,6 @@ function addCauseEventListeners() {
 			$('#text3').css('display','none');
 			$('#guessForm').css('display','block');
 			
-			
 			submitGuess(cause);
 	})
 	}
@@ -256,6 +255,8 @@ function causeByStateByYear(cause) {
 	  .attr("y", function(d) { return y(d.y0 + d.y); })
 	  .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
 	  .attr("width", x.rangeBand())
+	  .attr("class",  function(d) { return ("state "+ d.x)})
+	  .on('click', addStateEventListeners)
 	  .on("mouseover", function() { tooltip.style("display", null); })
 	  .on("mouseout", function() { tooltip.style("display", "none"); })
 	  .on("mousemove", function(d) {
@@ -307,11 +308,30 @@ function causeByStateByYear(cause) {
 	  .attr("font-size", "12px")
 	  .attr("font-weight", "bold");
 
+	addStateEventListeners();
+
 }
 
 
+// Add event listeners to each cause in data set
+function addStateEventListeners(d) {
+
+			var state = d.x;
+			console.log(state);
+			var test = stateYearDatabyCause(state);
+			return test;
+	
+}
+// function clickHandler(d, i) {
+//     // d is the datum
+//     // i is the index
+//     // this is the reference to the current element
+//     // d3.event is the reference to the current event
+// }
 
 
-
-
+function stateYearDataVisual(test){
+	// var test = stateYearDatabyCause(state);
+	console.log(test);
+}
 

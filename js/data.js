@@ -5,8 +5,9 @@ var rawData = [];
 var stateData = [];
 var yearData = [];
 var causeData = [];
-var stateYearData = []
-var stateYearDataAdjusted = []
+var stateYearData = [];
+var stateYearDataAdjusted = [];
+var stateYearData =[];
 
 // Unique Values
 var years = [];
@@ -25,14 +26,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function loadVisual(){
   $("#enterPage").click(function(e){
-
-
-    
     e.preventDefault();
     document.getElementById('introText').style.display = 'none';
     document.getElementById('dataVisual').style.display = 'block';
     retrieveRawData();
-
   })
 }
 
@@ -65,7 +62,7 @@ function retrieveRawData() {
      yearData = getYearData(rawData);
      causeData = getCauseData(rawData);
 
-    // load visual data
+    // Load Cause Visual
     causeVisual();
     addCauseEventListeners();
     return rawData;
@@ -146,6 +143,26 @@ function stateCauseData(cause) {
 
   return stateYearData;
 }
+
+function stateYearDatabyCause(state) {
+  console.log('GOT INTO stateYearDatabyCause')
+  for(var i=0; i< stateYearData.length; i++){
+
+      if(stateYearData[i].state === state){
+        Object.keys(stateYearData[i]).forEach(function(key){
+          if(isNaN(key)){
+            stateYearData.push(stateYearData[i]);
+            console.log(stateYearData[i]);
+          }
+        })
+
+      }
+    //stateYearData.push(stateObject);
+  }
+
+  return stateYearData;
+}
+
 
 
 
