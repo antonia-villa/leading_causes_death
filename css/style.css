@@ -8,7 +8,8 @@ body {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 44px;
+  font-weight: bold;
 }
 
 h2 {
@@ -22,11 +23,6 @@ p {
   margin: 0;
 }
 
-form {
-  position: relative;
-  right: 10px;
-  top: 10px;
-}
 
 /* Introduction Page */
 .dataDescription{
@@ -92,7 +88,7 @@ a {
 }
 
 /*********************/
-/* Instruction Modal */
+/* Modal Formatting  */
 /*********************/
 #text1{
   font-size: 16px;
@@ -110,7 +106,7 @@ a {
 }
 
 #modalHeaderText{
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -139,6 +135,10 @@ a {
 /*Guess Modal Styling*/
 /*********************/
 
-toastr.options {
-    timeOut: 100
+.toast {
+  opacity: 1 !important;
+}
+
+#toast-container > div {
+  opacity: 1 !important; 
 }

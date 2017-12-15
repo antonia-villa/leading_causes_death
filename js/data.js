@@ -85,7 +85,13 @@ function getYearData(rawData){
       distinctYears[rawData[i].year] += rawData[i].total;
     }
   }
-  return years;
+
+  // Sort years chronologically
+  years.sort(function(a, b) {
+      return a - b;
+  });
+
+  return years.reverse();
   return distinctYears;
 }
 

@@ -7,7 +7,7 @@ var causeDataSet = [];
 function causeVisual(){
 
 	// Append Sub-Heading
-	$('#visualHeading').text('<strong>Percent Distribution by cause:</strong> For all states from 1999 through 2015');
+	$('#visualHeading').text('Percent Distribution by Cause of Death');
     $('#guessForm').css("display","none");
     $('#myModal').modal('show');
     
@@ -44,13 +44,14 @@ function causeVisual(){
 	};
 
 	// Set Overall Visual size
-	var width = 950,
+	var width = 960,
 	    height = 500,
 	    color = d3.scale.category20c(),
 	    div = d3.select("body")
 	    		.append("div")
 	    		.attr("id", "causeVisual")
 	       		.style("position", "relative");
+
 
 	// Extract data
 	var treemap = d3.layout
@@ -59,9 +60,8 @@ function causeVisual(){
 	    .sticky(true)
 	    .value(function(d) { return d.total; });
 
-	// Define function that returns color for data point
-	var colors = ['#9CABB4', '#2D3234', '#B4B4B4', '#343434', '#707B81', '#0A1934', '#173773', '#C5C6C2', '#464645', '#929390', '#6F7376', '#F37A4D', '#C0603D', '#735347', '#0D10A6', '#A2C8F3', '#475873', '#96B9F3', '#202734']
-	
+
+    var colors = ['#9CABB4', '#2D3234', '#B4B4B4', '#343434', '#707B81', '#0A1934', '#173773', '#C5C6C2', '#464645', '#929390', '#6F7376', '#F37A4D', '#C0603D', '#735347', '#0D10A6', '#A2C8F3', '#475873', '#96B9F3', '#202734']
 	// Define individual node
 	var node = div.datum(tree)
 			.selectAll(".node")
@@ -70,80 +70,89 @@ function causeVisual(){
 	    	.append("div")
 	      	.attr("class", "node")
 	      	.attr("id", function(d) { return d.cause; })
+		    .style("background-color", function(d, i){
+		    	return colors[i];
+		    })
 	      	.call(position)
-	      	.style("background-color", function(d) {
-	           return d.cause == 'tree' ? '#fff' : color(d.cause); })
-
-	       //.style("background-color",colors[i])
 	      	.append('div')
 	      	.style("font-size", function(d) {
 	          // compute font size based on sqrt(area)
-	          return Math.max(8, 0.15*Math.sqrt(d.area))+'px'; })
+	          return Math.max(6, 0.14*Math.sqrt(d.area))+'px'; })
 	      	.text(function(d) { return d.children ? null : d.cause; })
 	      	.style("text-align", "center");
 
 	return causeDataSet;
 }
+	
+	// var colorcount = 0;
+// To set position and area of boxes based on distribution for Cause Data Visual
+function position() {
 
+  this.style("left", function(d) { return d.x + "px"; })
+      .style("top", function(d) { return d.y + "px"; })
+      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+}
 
-
+// Add event listeners to each cause in data set
 function addCauseEventListeners() {
 	var causes = $('.node');
 	for(var i =0; i < causes.length; i++){
 		causes[i].addEventListener('click', function(){
 			var cause = this.id;
 			$('#myModal').modal('show');
-			$('#interactionInstructions').css("display","none");
-			$('#guessForm').css("display","block");
-			$('#modalHeaderText').text('What percentage of total deaths does ' + cause + ' account for:');
+			$('#modalHeaderText').text('Take a guess to see more data')
+			$('#text1').text('What percent of total deaths do you think ' + cause + ' account for?')	
+			$('#text2').css('display','none');
+			$('#text3').css('display','none');
+			$('#guessForm').css('display','block');
+			
 			
 			submitGuess(cause);
 	})
 	}
 }
 
-// Evaluate Guess
+// Submit guess
 function submitGuess(cause){
-	var count = 0;
 	$("#submit").click(function(e){
 		e.preventDefault();
-		count++;
-		console.log(count);
         var guess = $("#guess").val(); 
 		evaluateGuess(guess, cause);
 	})
 }
 
-
+// Evaluate guess for correctness
 function evaluateGuess(guess, cause){
 
 	// Retrieve correct percent distribution for selected cause
     var correctPercent = 0; 
-    for(var i = 0; i< children.length; i++){
-    	if(children[i].cause === cause){
-    		correctPercent = children[i].percent;
+    for(var i = 0; i< causeDataSet.length; i++){
+    	if(causeDataSet[i].cause === cause){
+    		correctPercent = causeDataSet[i].percent;
     	}
 	}
 
-	// Check guess for correctness
+	// Calculate Margin in guess and correct distribution
+	var margin = guess - correctPercent
+
+	// Set ToastR timeout
+	toastr.options.timeOut = 2000;
+
 	if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
-    	toastr.options.timeOut = 2000;
     	toastr.success('Success messages');
 		hideModal();
-		nodeClicked(cause);
+		causeByStateByYear(cause);
 	} else {
-		// Calculate margin between guess and correct percentage
-		var margin = guess - correctPercent
 		if(margin > -10 && margin < 10){
-			toastr.options.timeOut = 2000; 
-			toastr.error('Try again! Your guess is within 10%!');
+			toastr.warning('Try again! Your guess is within 10%!');
 		} else {
-			toastr.options.timeOut = 2000; 
 			toastr.error('Try again! Your guess was >10% off!');
 		}
 	}
 }
 
+// Hide Modal upon correct guess
 function hideModal(){
   $(".modal").removeClass("in");
   $(".modal-backdrop").remove();
@@ -152,35 +161,24 @@ function hideModal(){
   $("#myModal").remove();
 }
 
-// To set positions for Cause Data Visual main style 
-function position() {
-  this.style("left", function(d) { return d.x + "px"; })
-      .style("top", function(d) { return d.y + "px"; })
-      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
-      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
-}
 
+// Create Data Distribution by State and Year for selected Cause
+function causeByStateByYear(cause) {
 
-var countofdatavisual=0;
-
-function nodeClicked(cause) {
 	// Retrieve Data set based on cause clicked
-	countofdatavisual++;
-
 	var data = stateCauseData(cause);
-	console.log(data);
 
 	// Hide Previous Data Visual
-	document.getElementById('causeVisual').style.display = 'none';
-	document.getElementById('visualHeading').innerHTML = "Cause of Death " + cause;
-	document.getElementById('subHeading').innerHTML = "By State and Year";
+	$('#causeVisual').css("display","none");
+	$('#visualHeading').text('Cause of Death: ' + cause);
+	$('#subHeading').text("Distribution by state and year");
 
-
+	// Set size of visual
 	var margin = {top: 20, right: 160, bottom: 60, left: 40};
-
 	var width = 1000 - margin.left - margin.right,
     	height = 600 - margin.top - margin.bottom;
 
+    // Generate main SVG for visual
 	var svg = d3
 	  .select("body")
 	  .append("svg")
@@ -190,10 +188,6 @@ function nodeClicked(cause) {
 	  .append("g")
 	  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	years.sort(function(a, b) {
-  		return a - b;
-	});
-
 
 	  // Transpose the data into layers
 	var dataset = d3.layout.stack()(years.map(function(year) {
@@ -202,7 +196,7 @@ function nodeClicked(cause) {
  		});
 	}));
 
-	// Set x, y and colors
+	// Set x, y scale and generate colors for series
 	var x = d3.scale.ordinal()
 	  .domain(dataset[0].map(function(d) { return d.x; }))
 	  .rangeRoundBands([0, width], .05)
@@ -216,6 +210,7 @@ function nodeClicked(cause) {
    		hue: 'blue'
 	});
 
+	// For percent distribution to create 100% bar chart
 	var formatPercent = d3.format(".00%");
 
 	// Define and draw axes
@@ -245,14 +240,14 @@ function nodeClicked(cause) {
 	  .attr("dy", "-1.55em")
 	  .attr("transform", "rotate(-90)" );
 
-	// Create groups for each series, rects for each segment 
+	// Create groups for each series
 	var groups = svg.selectAll("g.total")
 	  .data(dataset)
 	  .enter().append("g")
 	  .attr("class", "total")
 	  .style("fill", function(d, i) { return colors[i]; });
 
-	 // Draw Bar graph
+	 // Bar graph
 	var rect = groups.selectAll("rect")
 	  .data(function(d) { return d; })
 	  .enter()
@@ -271,7 +266,7 @@ function nodeClicked(cause) {
 	  	tooltip.select("text").attr("data-html", "true")
 	  });
 
-	  // Draw legend
+	// Legend
 	var legend = svg.selectAll(".legend")
 	  .data(colors)
 	  .enter()
@@ -294,23 +289,23 @@ function nodeClicked(cause) {
 	  		return years[i];
 	  	});
 
-	    // Prep the tooltip bits, initial display is hidden
-		var tooltip = svg.append("g")
-		  .attr("class", "tooltip")
-		  .style("display", "none");
-		    
-		tooltip.append("rect")
-		  .attr("width", 30)
-		  .attr("height", 20)
-		  .attr("fill", "white")
-		  .style("opacity", 0.5);
+    // Format tooltip, initial display is hidden
+	var tooltip = svg.append("g")
+	  .attr("class", "tooltip")
+	  .style("display", "none");
+	    
+	tooltip.append("rect")
+	  .attr("width", 30)
+	  .attr("height", 20)
+	  .attr("fill", "white")
+	  .style("opacity", 0.5);
 
-		tooltip.append("text")
-		  .attr("x",15)
-		  .attr("dy", "1.2em")
-		  .style("text-anchor", "middle")
-		  .attr("font-size", "12px")
-		  .attr("font-weight", "bold");
+	tooltip.append("text")
+	  .attr("x",15)
+	  .attr("dy", "1.2em")
+	  .style("text-anchor", "middle")
+	  .attr("font-size", "12px")
+	  .attr("font-weight", "bold");
 
 }
 
