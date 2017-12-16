@@ -57,7 +57,8 @@ function causeVisual(){
       div = d3.select("body")
           .append("div")
           .attr("id", "causeVisual")
-            .style("position", "relative");
+          .style("position", "relative");
+  
   //Append Tooltip
   var tool = d3.select("body").append("div").attr("class", "toolTip");
   
@@ -67,12 +68,6 @@ function causeVisual(){
       .size([width, height])
       .sticky(true)
       .value(function(d) { return d.total; });
-
-  // Define Color Palette 
-  //var colors = ['#9CABB4', '#2D3234', '#B4B4B4', '#343434', '#707B81', '#0A1934', '#173773', '#C5C6C2', '#464645', '#929390', '#6F7376', '#F37A4D', '#C0603D', '#735347', '#0D10A6', '#A2C8F3', '#475873', '#96B9F3', '#202734']
-  
-  //var colors = ['#3D598A', '#D0A24F', '#242932', ,'#4C4334', '#9BA4B3', '#FFF1D8', '#092B65', '#986200', '#2E6CD4', '#FFB023', '#262A2F', '#474238', '#99A0AB', '#FFF4E1', '#0D2C60', '#916006']
-  var colors = ['#49787e','#b3d2cd','#06304e','#86a6a2','#305b65','#97beb7','#154e67','#6a9e9d','#84b4bc','#ececec','#2a4648', '#cbdeef', '#8bb4db', '#3579b0', '#616167', '#2d436e', '#38383c']  
 
   // Define individual node
   var node = div.datum(tree)
@@ -97,7 +92,6 @@ function causeVisual(){
           tool.style("top", d3.event.pageY - 20 + "px")
           tool.style("display", "inline-block");
           tool.html(d.children ? null : d.cause)
-          // tool.html(d.children ? null : d.name + "<br>" + ' $ ' + formatMoney(Math.round(d.size * 1000)) + ' ' + roundToTwo((d.value / 16147370.2) * 100) + '%');
       }).on("mouseout", function (d) {
           tool.style("display", "none");
       });
