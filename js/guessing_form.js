@@ -6,10 +6,11 @@ function addCauseEventListeners() {
     causes[i].addEventListener('click', function(){
       var cause = this.id;
       $('#myModal').modal('show');
-      $('#modalHeaderText').text('Take a guess to see more data');
+      $('#modalHeaderText').text('Take a guess');
       $('#text1').text('What percent of total deaths do you think ' + cause + ' account for?')  
+      $('#guessInstructions').css('display','none');
       $('#text2').css('display','none');
-      $('#text3').css('display','none');
+      //$('#text3').css('display','none');
       $('#guessForm').css('display','block');
       
       submitGuess(cause);

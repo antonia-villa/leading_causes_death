@@ -16,7 +16,6 @@ h2 {
     font-weight: 100;
     font-size: 20px;
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 p {
@@ -27,6 +26,14 @@ a {
   color: inherit; 
   text-decoration: underline; 
 }
+
+hr { 
+    display: inline-block;
+    width: 950px;
+    border-style: inset;
+    border-width: .5px;
+    border-color:#9e9c9c;
+} 
 
 /*********************/
 /* Introduction Page */
@@ -74,19 +81,26 @@ a {
 /* Cause Data Visualization Styling */
 /************************************/
 #visualHeading {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-#subHeading {
-  font-style: italic;
-  font-size: 17px;
-  margin-bottom: 20px;
-  color: #56504e;
+  font-size: 46px;
+  margin-bottom: 10px; 
 }
 
 #dataVisualText{
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.toolTip {
+        position: absolute;
+        display: none;
+        width: 200px;
+        height: auto;
+        overflow-wrap: normal;
+        background: none repeat scroll 0 0 white;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font-size: 24px;
+        padding: 5px;
+        text-align: center;
 }
 
 /*********************/

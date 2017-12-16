@@ -14,7 +14,7 @@ function causeByStateByYear(cause) {
   var width = 1000 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;
 
-    // Generate main SVG for visual
+  // Generate main SVG for visual
   var svg = d3
     .select("body")
     .append("svg")
@@ -25,7 +25,7 @@ function causeByStateByYear(cause) {
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    // Transpose the data into layers
+  // Transpose the data into layers
   var dataset = d3.layout.stack()(years.map(function(year) {
       return data.map(function(d) {
         return {x: d.state, y: +d[year]/d.total, z: year};
@@ -41,10 +41,10 @@ function causeByStateByYear(cause) {
     .domain([0, d3.max(dataset, function(d) {  return d3.max(d, function(d) { return d.y0 + d.y; });  })])
     .range([height, 0]);
 
-  var colors  = randomColor({
-      count: years.length,
-      hue: 'blue'
-  });
+  // var colors  = randomColor({
+  //     count: years.length,
+  //     hue: 'blue'
+  // });
 
   // For percent distribution to create 100% bar chart
   var formatPercent = d3.format(".00%");

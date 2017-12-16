@@ -8,9 +8,11 @@ function causeVisual(){
 
   // Append Sub-Heading
   $('#visualHeading').text('Distribution by Cause of Death');
+  $('#subHeading').text('Data represents all states from 1999-2015');
   $('#guessForm').css("display","none");
   $('#myModal').modal('show');
   
+  // Modal Content
   $('#modalHeaderText').text('How to interact with the data:');
   $('#interactionInstructions').append('<p id="text1">The data displayed represents a distribution of the total number of deaths from 1999 - 2015 for all of the United States by cause. There is a lot of valuable knowledge to be gained viewing the data at high level and even more learnings at a granual level. Year and state have a casual effect on the distribution of deaths by cause.</p>');
   $('#interactionInstructions').append('<p id="text2">In order to understand more about a specific cause of death, follow these steps:</p>');
@@ -56,8 +58,9 @@ function causeVisual(){
           .append("div")
           .attr("id", "causeVisual")
             .style("position", "relative");
-
-
+  //Append Tooltip
+  var tool = d3.select("body").append("div").attr("class", "toolTip");
+  
   // Extract data
   var treemap = d3.layout
     .treemap()
@@ -88,8 +91,16 @@ function causeVisual(){
           // compute font size based on sqrt(area)
           return Math.max(6, 0.14*Math.sqrt(d.area))+'px'; })
         .text(function(d) { return d.children ? null : d.cause; })
-        .style("text-align", "center");
-        //.style("line-height", function(d) { return d.area + "px"; })
+        .style("text-align", "center")
+       .on("mousemove", function (d) {
+          tool.style("left", d3.event.pageX + 10 + "px")
+          tool.style("top", d3.event.pageY - 20 + "px")
+          tool.style("display", "inline-block");
+          tool.html(d.children ? null : d.cause)
+          // tool.html(d.children ? null : d.name + "<br>" + ' $ ' + formatMoney(Math.round(d.size * 1000)) + ' ' + roundToTwo((d.value / 16147370.2) * 100) + '%');
+      }).on("mouseout", function (d) {
+          tool.style("display", "none");
+      });
 
   return causeDataSet;
 }
