@@ -9,17 +9,10 @@ function causeVisual(){
   // Append Sub-Heading
   $('#visualHeading').text('Distribution by Cause of Death');
   $('#subHeading').text('Data represents all states from 1999-2015');
-  $('#guessForm').css("display","none");
-  $('#myModal').modal('show');
   
-  // Modal Content
-  $('#modalHeaderText').text('How to interact with the data:');
-  $('#interactionInstructions').append('<p id="text1">The data displayed represents a distribution of the total number of deaths from 1999 - 2015 for all of the United States by cause. There is a lot of valuable knowledge to be gained viewing the data at high level and even more learnings at a granual level. Year and state have a casual effect on the distribution of deaths by cause.</p>');
-  $('#interactionInstructions').append('<p id="text2">In order to understand more about a specific cause of death, follow these steps:</p>');
-  $('<ul/>').appendTo('#interactionInstructions').attr("id", "guessInstructions")
-  $("#guessInstructions").append($("<li>").text("CLICK on a specific cause"));
-  $("#guessInstructions").append($("<li>").text("GUESS percent of the total it represents"));
-  $("#guessInstructions").append($("<li>").text("LEARN more about the cause of death by state and year"));
+  // BuildModal
+  buildModal();
+  buildModalInstructions();
 
 
   // create Grandtotal of deaths for % distribution

@@ -1,15 +1,15 @@
 function buildModal(){
 
   // Dynamically Build Modal to contain pop-up visual
-    html =  '<div class="modal fade" id ="myModal" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
+    html =  '<div class="modal fade" id ="myModal" role="dialog">';
     html += '<div class="modal-dialog">';
     html += '<div class="modal-content">';
     html += '<div class="modal-header">';
-    html += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
-    html += '<h4 class="modal-title" id="modalHeaderText">''</h4>'
+    html += '<a class="close" data-dismiss="modal">×</a>';
+    html += '<h4 class="modal-title" id="modalHeaderText">';
+    html += '</h4>';
     html += '</div>';
-    html += '<div class="modal-body">';
-    html += '</div>';
+    html += '<div class="modal-body" id="modalVisual">';
     html += '<div id = "interactionInstructions">'
     html += '</div>';
     html += '<div class="modal-footer">';
@@ -34,18 +34,25 @@ function buildModalInstructions(){
   $("#guessInstructions").append($("<li>").text("CLICK on a specific cause"));
   $("#guessInstructions").append($("<li>").text("GUESS percent of the total it represents"));
   $("#guessInstructions").append($("<li>").text("LEARN more about the cause of death by state and year"));
-
 }
 
-function buildModalGuessForm(){
+function buildModalGuessForm(cause){
 
-    html += '<form id="guessForm">'
-    html += '<input type="number" id ="guess" value="80">'
-    html += '<input type="submit" value="Submit" id="submit">'
-    html += '</form>'
+    $('#modalHeaderText').text('Take a guess');
+    $('#interactionInstructions').append('<p id="text1"> What percent of total deaths do you think ' + cause + ' account for?</p>');
+    $('#interactionInstructions').append('<form id="guessForm"><input type="number" id ="guess" value="80"><input type="submit" value="Submit" id="submit"></form>')
+}
 
-    $('#interactionInstructions').append(html);
-    // $("#myModal").modal();
-    // $("#myModal").modal('show');
+function buildVisualPopUpModal(state, cause){
+    $('#interactionInstructions').remove();
+    $('#modalHeaderText').text('Yearly distribution of '+ cause + ' in ' + state);
+}
 
+// Hide Modal
+function hideModal(){
+  $(".modal").removeClass("in");
+  $(".modal-backdrop").remove();
+  $('body').removeClass('modal-open');
+  $('body').css('padding-right', '');
+  $("#myModal").remove();
 }

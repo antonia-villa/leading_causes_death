@@ -10,6 +10,7 @@ function causeByStateByYear(cause) {
   $('#subHeading').text("Distribution by state and year");
   $('#dataVisual').attr("width", "950px");
   $('#dataVisual').attr("width", "950px");
+
   // Create Back button
   var backButton = $('<input type="button" value="Back" class="btn btn-primary" id ="backButton"/>');
   backButton.appendTo($("#backButtonContainer"));
@@ -96,7 +97,7 @@ function causeByStateByYear(cause) {
     .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
     .attr("width", x.rangeBand())
     .attr("class",  function(d) { return ("state "+ d.x)})
-    .on('click', function(d){ addStateEventListeners(d); })
+    .on('click', function(d){ addStateEventListeners(d, cause); })
     .on("mouseover", function() { tooltip.style("display", null); })
     .on("mouseout", function() { tooltip.style("display", "none"); })
     .on("mousemove", function(d) {
@@ -152,14 +153,14 @@ tooltip.append("text")
 
 
 // Add event listeners to each state in data set
-function addStateEventListeners(d) {
+function addStateEventListeners(d, cause) {
 
       // Retreieve State Name of Clicked State
       var state = d.x;
       // Create state and cause specific data set
       var stateSpecificData = stateYearDatabyCause(state);
       // Load pop-up visual 
-      stateYearDataVisual(stateSpecificData, state);
+      stateYearDataVisual(stateSpecificData, state, cause);
 }
 
 

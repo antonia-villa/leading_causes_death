@@ -5,14 +5,9 @@ function addCauseEventListeners() {
   for(var i =0; i < causes.length; i++){
     causes[i].addEventListener('click', function(){
       var cause = this.id;
-      $('#myModal').modal('show');
-      $('#modalHeaderText').text('Take a guess');
-      $('#text1').text('What percent of total deaths do you think ' + cause + ' account for?')  
-      $('#guessInstructions').css('display','none');
-      $('#text2').css('display','none');
-      //$('#text3').css('display','none');
-      $('#guessForm').css('display','block');
-      
+      hideModal();
+      buildModal();
+      buildModalGuessForm(cause);
       submitGuess(cause);
   })
   }
@@ -66,27 +61,4 @@ function hideModal(){
   $("#myModal").remove();
 }
 
-// function buildModal(){
-
-//   // Dynamically Build Modal to contain pop-up visual
-//     html =  '<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
-//     html += '<div class="modal-dialog">';
-//     html += '<div class="modal-content">';
-//     html += '<div class="modal-header">';
-//     html += '<a class="close" data-dismiss="modal">×</a>';
-//     html += '<h4>'+state+'</h4>'
-//     html += '</div>';
-//     html += '<div class="modal-body" id="modalVisual">';
-//     html += '</div>';
-//     html += '<div class="modal-footer">';
-//     html += '<span class="btn btn-primary" data-dismiss="modal">Close</span>';
-//     html += '</div>';  // content
-//     html += '</div>';  // dialog
-//     html += '</div>';  // footer
-//     html += '</div>';  // modalWindow
-
-//     $('body').append(html);
-//     $(".modal fade").modal();
-//     $(".modal fade").modal('show');
-// }
 
