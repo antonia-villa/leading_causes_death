@@ -9,7 +9,7 @@ function addCauseEventListeners() {
       buildModal();
       buildModalGuessForm(cause);
       submitGuess(cause);
-  })
+    })
   }
 }
 
@@ -51,14 +51,4 @@ function evaluateGuess(guess, cause){
     }
   }
 }
-
-// Hide Modal upon correct guess
-function hideModal(){
-  $(".modal").removeClass("in");
-  $(".modal-backdrop").remove();
-  $('body').removeClass('modal-open');
-  $('body').css('padding-right', '');
-  $("#myModal").remove();
-}
-
 

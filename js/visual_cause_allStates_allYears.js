@@ -154,7 +154,6 @@ tooltip.append("text")
 
 // Add event listeners to each state in data set
 function addStateEventListeners(d, cause) {
-
       // Retreieve State Name of Clicked State
       var state = d.x;
       // Create state and cause specific data set
@@ -164,13 +163,18 @@ function addStateEventListeners(d, cause) {
 }
 
 
+
 function goBack(){
   $('#backButton').click(function(e){
+    $('#backButton').remove();
     e.preventDefault()
     loadCauseVisual();
     addCauseEventListeners();
-    $('#myModal').modal('hide');
-    $('#stateCauseVisual').css("display", "none");
+    stateYearData = [];
+    causebyStatebyYear = [];
+
+    $('#myModal').remove();
+    $('#stateCauseVisual').remove();
     $('#causeVisual').css("display","block");
   })
 }

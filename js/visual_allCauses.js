@@ -9,7 +9,7 @@ function causeVisual(){
   // Append Sub-Heading
   $('#visualHeading').text('Distribution by Cause of Death');
   $('#subHeading').text('Data represents all states from 1999-2015');
-  
+
   // BuildModal
   buildModal();
   buildModalInstructions();
@@ -97,5 +97,4 @@ function position() {
       .style("top", function(d) { return d.y + "px"; })
       .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
       .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; })
-      //.style("line-height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
 }

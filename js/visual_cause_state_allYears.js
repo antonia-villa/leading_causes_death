@@ -14,11 +14,11 @@ function stateYearDataVisual(stateSpecificData, state, cause){
 
   // Get Max Value in data set for y-axis scaling
   var margin = {top: 20, right: 20, bottom: 70, left: 60},
-    width = 600 - margin.left - margin.right,
+    width = 580 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
   // set the ranges
-  var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.15);
+  var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.12);
   //var x = d3.scale.linear().range([0, width]);
   var y = d3.scale.linear().range([height, 0]);
 
@@ -64,11 +64,17 @@ function stateYearDataVisual(stateSpecificData, state, cause){
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
-      .attr("transform", "rotate(-90)")
+        .attr("transform", function(d) {
+    return "translate(" + -60 + "," + this.getBBox().height / 3 + ") rotate(-90)";
+  })
       .attr("y", 3)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Deaths");
+      .text("Deaths by Year");
+
+  //     .attr("transform", function(d) {
+  //   return "translate(" + -50 + "," + this.getBBox().height / 2 + ") rotate(-90)";
+  // });
 
 
   // Add bar chart
@@ -78,7 +84,7 @@ function stateYearDataVisual(stateSpecificData, state, cause){
       .append("rect")
       .attr("class", "bar")
       .style("fill","gray")
-      .attr("x", function(d,i) { return (i*30)+10; })
+      .attr("x", function(d,i) { return (i*29)+10; })
       .attr("width", x.rangeBand())
       .attr( "y", function(d){ return y(d);})
       .attr("height", function(d) { return height - y(d); });

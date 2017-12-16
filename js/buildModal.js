@@ -45,7 +45,10 @@ function buildModalGuessForm(cause){
 
 function buildVisualPopUpModal(state, cause){
     $('#interactionInstructions').remove();
-    $('#modalHeaderText').text('Yearly distribution of '+ cause + ' in ' + state);
+    $('#modalHeaderText').text('Deaths caused by '+ cause + ' in ' + state);
+    $('#modalHeaderText').css("text-transform", "none").css("text-align", "left");
+    $('.modal-body').css("padding-left", "10px");
+    $('.modal-footer').remove();
 }
 
 // Hide Modal
