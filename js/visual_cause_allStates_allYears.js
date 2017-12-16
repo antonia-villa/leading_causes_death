@@ -8,6 +8,12 @@ function causeByStateByYear(cause) {
   $('#causeVisual').css("display","none");
   $('#visualHeading').text('Cause of Death: ' + cause);
   $('#subHeading').text("Distribution by state and year");
+  $('#dataVisual').attr("width", "950px");
+  $('#dataVisual').attr("width", "950px");
+  // Create Back button
+  var backButton = $('<input type="button" value="Back" class="btn btn-primary" id ="backButton"/>');
+  backButton.appendTo($("#backButtonContainer"));
+  goBack();
 
   // Set size of visual
   var margin = {top: 20, right: 160, bottom: 60, left: 40};
@@ -154,4 +160,16 @@ function addStateEventListeners(d) {
       var stateSpecificData = stateYearDatabyCause(state);
       // Load pop-up visual 
       stateYearDataVisual(stateSpecificData, state);
+}
+
+
+function goBack(){
+  $('#backButton').click(function(e){
+    e.preventDefault()
+    loadCauseVisual();
+    addCauseEventListeners();
+    $('#myModal').modal('hide');
+    $('#stateCauseVisual').css("display", "none");
+    $('#causeVisual').css("display","block");
+  })
 }

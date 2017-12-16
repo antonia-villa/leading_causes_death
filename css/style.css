@@ -103,6 +103,19 @@ hr {
         text-align: center;
 }
 
+#backButton {
+  position: absolute; 
+  right: 0;
+}
+
+#backButtonContainer{
+  display: inline-block;
+}
+
+#subHeading {
+  display: inline-block;
+}
+
 /*********************/
 /* Modal Formatting  */
 /* Cause Visual Modal*/

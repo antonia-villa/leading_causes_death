@@ -42,8 +42,6 @@ function causeVisual(){
     }
   }
 
-  console.log(causeDataSet);
-
   // Create Tree Structure
   var tree = {
       cause: "tree",

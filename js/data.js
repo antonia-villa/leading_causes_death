@@ -174,7 +174,3 @@ function stateYearDatabyCause(state) {
   return causebyStatebyYear;
 }
 
-
-
-
-
