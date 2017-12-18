@@ -176,5 +176,7 @@ function goBack(){
     $('#myModal').remove();
     $('#stateCauseVisual').remove();
     $('#causeVisual').css("display","block");
+    $('#visualHeading').text('Distribution by Cause of Death');
+    $('#subHeading').text('Data represents all states from 1999-2015');;
   })
 }

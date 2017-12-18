@@ -18,7 +18,7 @@ function stateYearDataVisual(stateSpecificData, state, cause){
     height = 300 - margin.top - margin.bottom;
 
   // set the ranges
-  var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.12);
+  var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.11);
   //var x = d3.scale.linear().range([0, width]);
   var y = d3.scale.linear().range([height, 0]);
 
@@ -50,31 +50,30 @@ function stateYearDataVisual(stateSpecificData, state, cause){
 
   //add axis
   svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(10," + height + ")")
-      .call(xAxis)
-    .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", "-.55em")
-      .attr("transform", "rotate(-90)" );
-
+  .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-90)" 
+                });
 
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
-        .attr("transform", function(d) {
+      .attr("transform", function(d) {
     return "translate(" + -60 + "," + this.getBBox().height / 3 + ") rotate(-90)";
   })
       .attr("y", 3)
       .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Deaths by Year");
 
-  //     .attr("transform", function(d) {
-  //   return "translate(" + -50 + "," + this.getBBox().height / 2 + ") rotate(-90)";
-  // });
+  // Style the axis lines
+  svg.selectAll('path')
+  .style({ 'stroke': 'black', 'fill': 'none', 'stroke-width': '.5px'});
 
 
   // Add bar chart

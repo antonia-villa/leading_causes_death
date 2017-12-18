@@ -106,6 +106,7 @@ hr {
 #backButton {
   position: absolute; 
   right: 0;
+  margin-right: 100px;
 }
 
 #backButtonContainer{
@@ -142,6 +143,7 @@ hr {
 
 #guessInstructions{
   font-size: 16px;
+  margin-bottom: 40px;
 }
 
 
@@ -176,13 +178,22 @@ hr {
   opacity: 1 !important; 
 }
 
-#id{
-  margin-bottom: 20px;
-}
-
 #guessForm{
   text-align: center;
   margin-bottom: 30px;
+}
+
+#submit{
+  margin-left: 10px;
+}
+
+.btn-default{
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  padding: 2px 18px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 /**************************/
 /*Pop-up Visual Dialog Box*/
