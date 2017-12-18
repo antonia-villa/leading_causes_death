@@ -4,7 +4,7 @@ function causeByStateByYear(cause) {
   // Retrieve Data set based on cause clicked
   var data = stateCauseData(cause);
 
-  // Hide Previous Data Visual
+  // Hide Previous Data Visual and Change Headers
   $('#causeVisual').css("display","none");
   $('#visualHeading').text('Cause of Death: ' + cause);
   $('#subHeading').text("Distribution by state and year");
@@ -51,7 +51,7 @@ function causeByStateByYear(cause) {
   // For percent distribution to create 100% bar chart
   var formatPercent = d3.format(".00%");
 
-  // Define and draw axes
+  // Define y-axis
   var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
@@ -59,11 +59,13 @@ function causeByStateByYear(cause) {
     .tickSize(-width, 0, 0)
     .tickFormat(formatPercent);
 
+  // Define x-axis
   var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
     .tickSize(4, 2, 0)
 
+  // Append x-axis & y-axis
   svg.append("g")
     .attr("class", "y axis")
     .call(yAxis);
@@ -78,16 +80,14 @@ function causeByStateByYear(cause) {
     .attr("dy", "-1.55em")
     .attr("transform", "rotate(-90)" );
 
-  // Create groups for each series
+  // Create groups for each data series
   var groups = svg.selectAll("g.total")
     .data(dataset)
     .enter().append("g")
     .attr("class", "total")
     .style("fill", function(d, i) { return colors[i]; });
 
-  
-
-   // Bar graph
+  // Draw final bar graph
   var rect = groups.selectAll("rect")
     .data(function(d) { return d; })
     .enter()
@@ -98,7 +98,7 @@ function causeByStateByYear(cause) {
     .attr("width", x.rangeBand())
     .attr("class",  function(d) { return ("state "+ d.x)})
     .on('click', function(d){ addStateEventListeners(d, cause); })
-    .on("mouseover", function() { tooltip.style("display", null); })
+    .on("mouseover", function() { tooltip.style("display", "block"); })
     .on("mouseout", function() { tooltip.style("display", "none"); })
     .on("mousemove", function(d) {
       var xPosition = d3.mouse(this)[0] - 15;
@@ -127,14 +127,12 @@ function causeByStateByYear(cause) {
     .attr("y", 9)
     .attr("dy", ".35em")
     .style("text-anchor", "start")
-    .text(function(d, i) { 
-        return years[i];
-      });
+    .text(function(d, i) { return years[i];});
 
-// Prep the tooltip bits, initial display is hidden
+// Prepare the tooltips (**Unfortunately not currently working - will be for Verison 2.0)
 var tooltip = svg.append("g")
   .attr("class", "tooltip")
-  .style("display", "none");
+  .style("display", "show");
     
 tooltip.append("rect")
   .attr("width", 30)
@@ -148,11 +146,10 @@ tooltip.append("text")
   .style("text-anchor", "middle")
   .attr("font-size", "12px")
   .attr("font-weight", "bold");
-
 }
 
 
-// Add event listeners to each state in data set
+// Add event listeners to each state and year rectangle in data set
 function addStateEventListeners(d, cause) {
       // Retreieve State Name of Clicked State
       var state = d.x;
@@ -163,18 +160,21 @@ function addStateEventListeners(d, cause) {
 }
 
 
-
+// Add functionality for back button
 function goBack(){
   $('#backButton').click(function(e){
     $('#backButton').remove();
     e.preventDefault()
     loadCauseVisual();
     addCauseEventListeners();
+    
+    // Reset Global Data Sets
     stateYearData = [];
     causebyStatebyYear = [];
 
-    $('#myModal').remove();
+    // Destroy Modal and reset text for Cause Visual
     $('#stateCauseVisual').remove();
+    hideModal();
     $('#causeVisual').css("display","block");
     $('#visualHeading').text('Distribution by Cause of Death');
     $('#subHeading').text('Data represents all states from 1999-2015');;

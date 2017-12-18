@@ -12,38 +12,39 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div id ="introText">
-	<h1 id="introHeading">Leading Causes of Death: United States</h1>
-	<h2>Publisher: Centers for Disease Control and Prevention</h2>
-	<div class="dataDescription"> 
-		<p>This dataset presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning in 1999. Data is based on information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics. Age-adjusted death rates (per 100,000 population) are based on the 2000 U.S. standard population. Populations used for computing death rates after 2010 are postcensal estimates based on the 2010 census, estimated as of July 1, 2010. Rates for census years are based on populations enumerated in the corresponding censuses. Rates for non-census years before 2010 are revised using updated intercensal population estimates and may differ from rates previously published.Causes of death classified by the International Classification of Diseases, Tenth Revision are ranked according to the number of deaths assigned to rankable causes. Cause of death statistics are based on the underlying cause of death.</p>
+	<div id ="introText">
+		<h1 id="introHeading">Leading Causes of Death: United States</h1>
+		<h2>Publisher: Centers for Disease Control and Prevention</h2>
+		<div class="dataDescription"> 
+			<p>This dataset presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning in 1999. Data is based on information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics. Age-adjusted death rates (per 100,000 population) are based on the 2000 U.S. standard population. Populations used for computing death rates after 2010 are postcensal estimates based on the 2010 census, estimated as of July 1, 2010. Rates for census years are based on populations enumerated in the corresponding censuses. Rates for non-census years before 2010 are revised using updated intercensal population estimates and may differ from rates previously published.Causes of death classified by the International Classification of Diseases, Tenth Revision are ranked according to the number of deaths assigned to rankable causes. Cause of death statistics are based on the underlying cause of death.</p>
+		</div>
+		<input type="submit" class="btn btn-primary" value="Learn more" id="enterPage">
+		<div id="footerText">
+			<p>Author: Antonia Villa</p>
+			<p id="datasource"> Data is provided by <a href="https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013"><strong>Open Data Project</strong></a></p>
+		</div>
 	</div>
-	<input type="submit" class="btn btn-primary" value="Learn more" id="enterPage">
-	<div id="footerText">
-		<p>Author: Antonia Villa</p>
-		<p id="datasource"> Data is provided by <a href="https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013"><strong>Open Data Project</strong></a></p>
+	<div id="dataVisual">
+		<div id="dataVisualText">
+			<h1 id="visualHeading"></h1>
+			<div id="backButtonContainer">
+				<h2 id="subHeading"></h2>
+			</div>
+		</div>
+		<hr>
+		<div id="visual">
+	  	</div>
 	</div>
-</div>
-<div id="dataVisual">
-	<div id="dataVisualText">
-		<h1 id="visualHeading"></h1>
-		<div id="backButtonContainer">
-		<h2 id="subHeading"></h2></div>
-	</div>
-	<hr>
-	<div id="visual">
-  </div>
-</div>
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="js/buildModal.js"></script> 
-<script src="js/data.js"></script>
-<script src="js/visual_allCauses.js"></script>
-<script src="js/guessing_form.js"></script>
-<script src="js/visual_cause_allStates_allYears.js"></script>
-<script src="js/visual_cause_state_allYears.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<script src="js/buildModal.js"></script> 
+	<script src="js/data.js"></script>
+	<script src="js/visual_allCauses.js"></script>
+	<script src="js/guessing_form.js"></script>
+	<script src="js/visual_cause_allStates_allYears.js"></script>
+	<script src="js/visual_cause_state_allYears.js"></script>
 </body>
 </html>

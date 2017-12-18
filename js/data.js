@@ -18,8 +18,8 @@ var years = [];
 var causes = [];
 var states = [];
 
-  // Define Color Palette 
-  var colors = ['#49787e','#b3d2cd','#06304e','#86a6a2','#305b65','#97beb7','#154e67','#6a9e9d','#84b4bc','#ececec','#2a4648', '#cbdeef', '#8bb4db', '#3579b0', '#616167', '#2d436e', '#38383c']  
+//Color Palette 
+var colors = ['#49787e','#b3d2cd','#06304e','#86a6a2','#305b65','#97beb7','#154e67','#6a9e9d','#84b4bc','#ececec','#2a4648', '#cbdeef', '#8bb4db', '#3579b0', '#616167', '#2d436e', '#38383c']  
 
 
 
@@ -41,30 +41,29 @@ function loadCauseVisual(){
 }
 
 
-// Get Raw Data 
+// Retrieve and format raw data
 function retrieveRawData() {
  
   $.get('https://data.cdc.gov/api/views/bi63-dtpu/rows.json?accessType=DOWNLOAD')
   .done(function(response) {
 
      var data = response.data;
-    
-      // Restructure Data Set
-      for(var i=0; i< data.length; i++){
-        var dataItem = data[i];
+    // Restructure Data Set
+    for(var i=0; i< data.length; i++){
+      var dataItem = data[i];
 
-        var updatedItem = {
-          'year': Number(dataItem[8]), 
-          'category': dataItem[9],
-          'cause': dataItem[10],
-          'state': dataItem[11],
-          'total': Number(dataItem[12])
-        };
+      var updatedItem = {
+        'year': Number(dataItem[8]), 
+        'category': dataItem[9],
+        'cause': dataItem[10],
+        'state': dataItem[11],
+        'total': Number(dataItem[12])
+      };
 
-        // Cleanse Data
-        if(updatedItem.state != 'United States'){
-        rawData.push(updatedItem);
-      }
+      // Cleanse Data
+      if(updatedItem.state != 'United States'){
+      rawData.push(updatedItem);
+    }
      };
 
      // Create sub-data sets
@@ -73,7 +72,7 @@ function retrieveRawData() {
      causeData = getCauseData(rawData);
 
     // Load First Visual: Least granular data set 
-    causeVisual();
+    causeVisual(rawData);
     addCauseEventListeners();
 
     return rawData;
@@ -99,7 +98,6 @@ function getYearData(rawData){
   years.sort(function(a, b) {
       return a - b;
   }).reverse();
-
   return years;
   return distinctYears;
 }
@@ -146,14 +144,14 @@ function stateCauseData(cause) {
     var stateObject = {'state': states[i]};
     var stateTotal = 0;
 
-      for(var j=0; j< rawData.length;j++){
-          if(rawData[j].state === states[i] && rawData[j].cause === cause){
-              var year = rawData[j].year;
-              stateObject[year] = rawData[j].total;
-              stateTotal = stateTotal + rawData[j].total;
-              stateObject['total'] = stateTotal
-          }
-      }
+    for(var j=0; j< rawData.length;j++){
+        if(rawData[j].state === states[i] && rawData[j].cause === cause){
+            var year = rawData[j].year;
+            stateObject[year] = rawData[j].total;
+            stateTotal = stateTotal + rawData[j].total;
+            stateObject['total'] = stateTotal
+        }
+    }
     stateYearData.push(stateObject);
   }
   return stateYearData;

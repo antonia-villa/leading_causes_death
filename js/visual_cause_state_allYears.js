@@ -45,10 +45,11 @@ function stateYearDataVisual(stateSpecificData, state, cause){
     .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")");
 
+  // set x and y domains
   x.domain(label.map(function(d) { return d; }));
   y.domain([0, d3.max(data, function(d) { return d; })]);
 
-  //add axis
+  //add x-axis
   svg.append("g")
   .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
@@ -57,17 +58,14 @@ function stateYearDataVisual(stateSpecificData, state, cause){
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
-            .attr("transform", function(d) {
-                return "rotate(-90)" 
-                });
-
+            .attr("transform", function(d) {return "rotate(-90)" });
+  
+  //add y-axis
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
-      .attr("transform", function(d) {
-    return "translate(" + -60 + "," + this.getBBox().height / 3 + ") rotate(-90)";
-  })
+      .attr("transform", function(d) { return "translate(" + -60 + "," + this.getBBox().height / 3 + ") rotate(-90)";})
       .attr("y", 3)
       .attr("dy", ".71em")
 
@@ -92,7 +90,5 @@ function stateYearDataVisual(stateSpecificData, state, cause){
     $('#myModal').on('hidden.bs.modal', function (e) {
         $(this).remove();
     });
-
-
 }
 
