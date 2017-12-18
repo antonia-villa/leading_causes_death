@@ -1,8 +1,8 @@
 # PROJECT 1
-# DATA SOURCE: https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013
+# DATA SOURCE:
+https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013
 
 # Technical Requirements
-
 - Load JSON Data from API
 - Tell data narrative 
 - Create Visual using D3 Library
@@ -48,8 +48,7 @@
 
 
 # Unsolved Problems
-Tooltips are not displaying data as I would like them too
-
+Tooltips are not displaying data
 
 # Next Steps
 - Learning more indepth D3
