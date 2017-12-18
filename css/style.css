@@ -104,9 +104,11 @@ hr {
 }
 
 #backButton {
-  position: absolute; 
-  right: 0;
-  margin-right: 100px;
+    margin-top: 70px;
+    margin-right: 100px;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
 #backButtonContainer{
@@ -150,11 +152,12 @@ hr {
 /*Tree Visual Styling*/
 /*********************/
  .node {
-    border: solid .5px white;
+    border: solid 1px white;
     overflow: hidden;
     position: absolute;
     top: 50%;
     border-radius: 1px;
+    font-weight: bold;
     background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:    -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
     background-image:     -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));

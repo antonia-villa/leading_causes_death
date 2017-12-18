@@ -1,8 +1,10 @@
 // Create Data Distribution by State and Year for selected Cause
-function causeByStateByYear(cause) {
+function causeByStateByYear(cause,correctPercent) {
 
   // Retrieve Data set based on cause clicked
   var data = stateCauseData(cause);
+  buildModal();
+  buildModalGuessAnswer(cause, correctPercent);
 
   // Hide Previous Data Visual and Change Headers
   $('#causeVisual').css("display","none");

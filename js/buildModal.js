@@ -42,6 +42,12 @@ function buildModalGuessForm(cause){
     $('#interactionInstructions').append('<form id="guessForm"><input type="number" id ="guess" value="80"><input class="btn-default" type="submit" value="Submit" id="submit"></form>')
 }
 
+// Correct Answer Modal for Guessing From
+function buildModalGuessAnswer(cause, correctPercent){
+    $('#modalHeaderText').text('Good Guess!');
+    $('#interactionInstructions').append('<p id="text1"> ' + cause + ' accounts for ' + correctPercent + '% of all deaths in the United States from 1999-2015.</p>');
+}
+
 // Pop-Up Modal for Visual Cause State All Years
 function buildVisualPopUpModal(state, cause){
     $('#interactionInstructions').remove();

@@ -19,10 +19,17 @@ function addCauseEventListeners() {
 function submitGuess(cause){
   $("#submit").click(function(e){
     e.preventDefault();
-    var guess = $("#guess").val(); 
-    evaluateGuess(guess, cause);
+    var guess = $("#guess").val();
+    if(guess == ""){
+      alert("You must take a guess!");
+    } else if (isNaN(guess)){
+      alert("Your guess must be numeric. For example) If you want to guess 80%, enter 80.");
+    } else {
+      evaluateGuess(guess, cause);
+    }
   });
 }
+
 
 // Evaluate guess for correctness
 function evaluateGuess(guess, cause){
@@ -45,7 +52,7 @@ function evaluateGuess(guess, cause){
   if((guess >= correctPercent-5) && (guess <= correctPercent+5)){
     toastr.success('Success messages');
     hideModal();
-    causeByStateByYear(cause);
+    causeByStateByYear(cause, correctPercent);
   } else {
     if(margin > -10 && margin < 10){
       toastr.warning('Try again! Your guess is within 10%!');
