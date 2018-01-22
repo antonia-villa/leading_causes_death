@@ -64,7 +64,7 @@ function retrieveRawData() {
       if(updatedItem.state != 'United States'){
       rawData.push(updatedItem);
     }
-     };
+  };
 
      // Create sub-data sets
      stateData = getStateData(rawData);
@@ -146,10 +146,10 @@ function stateCauseData(cause) {
 
     for(var j=0; j< rawData.length;j++){
         if(rawData[j].state === states[i] && rawData[j].cause === cause){
-            var year = rawData[j].year;
-            stateObject[year] = rawData[j].total;
-            stateTotal = stateTotal + rawData[j].total;
-            stateObject['total'] = stateTotal
+          var year = rawData[j].year;
+          stateObject[year] = rawData[j].total;
+          stateTotal = stateTotal + rawData[j].total;
+          stateObject['total'] = stateTotal
         }
     }
     stateYearData.push(stateObject);
